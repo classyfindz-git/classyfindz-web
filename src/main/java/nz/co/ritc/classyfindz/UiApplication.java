@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -27,7 +25,6 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -36,7 +33,8 @@ import org.springframework.web.util.WebUtils;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class UiApplication extends SpringBootServletInitializer {
+@RestController
+public class UiApplication {
 
 	@RequestMapping("/user")
 	public Principal user(Principal user) {
@@ -54,12 +52,6 @@ public class UiApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(UiApplication.class, args);
 	}
-
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(UiApplication.class);
-    }
 
 	
 	@Configuration
@@ -105,13 +97,3 @@ public class UiApplication extends SpringBootServletInitializer {
 	}
 
 }
-
-
-@RestController
-class GreetingController {
-
-    @RequestMapping("/hello/{name}")
-    String hello(@PathVariable String name) {
-        return "Hello, " + name + "!";
-    }
-} 
