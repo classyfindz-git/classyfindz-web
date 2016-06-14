@@ -39,7 +39,7 @@
 			authenticate($scope.credentials, function(authenticated) {
 				if (authenticated) {
 					console.log("Login succeeded")
-					$location.path("/");
+					$location.path("/home");
 					$scope.error = false;
 					$rootScope.authenticated = true;
 				} else {
@@ -51,20 +51,10 @@
 			})
 		};
 
-		$scope.logout = function() {
-			$http.post('logout', {}).success(function() {
-				$rootScope.authenticated = false;
-				$location.path("/");
-			}).error(function(data) {
-				console.log("Logout failed")
-				$rootScope.authenticated = false;
-			});
-		}
-
 	};
 
     LoginController.$inject = injectParams;
 
-    angular.module('1columnwide').controller('navigation', LoginController);
+    angular.module('1columnwide').controller('login', LoginController);
 
 }());
