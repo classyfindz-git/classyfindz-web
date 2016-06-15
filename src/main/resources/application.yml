@@ -1,6 +1,9 @@
-security:
-  user:
-    password: password
 logging:
   level:
     org.springframework.security: DEBUG
+
+jdbc:
+  driverClassName: 'com.mysql.jdbc.Driver'
+  username: m1cwdev1
+  password: nnzj58TYM
+  url: 'jdbc:mysql://db-1cw-dev-1.cq2j9lvsqvyg.us-west-2.rds.amazonaws.com:3306/db_1cw_dev_1'
