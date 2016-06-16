@@ -82,11 +82,13 @@ public class UiApplication extends SpringBootServletInitializer {
 						+ " inner join groups g on g.id = m.group_id"
 						+ " where m.username=?");
 		} 
-		
+
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.httpBasic().and().authorizeRequests()
-					.antMatchers("/index.html", "/home.html", "/login.html", "/static/**", "/login" , "/logout" , "/").permitAll().anyRequest()
+					.antMatchers("/index.html", "/home.html", "/login.html", 
+							"/static/**", "/bower_components/**","/css/**", 
+							"/login" , "/logout" , "/").permitAll().anyRequest()
 					.authenticated().and().csrf()
 					.csrfTokenRepository(csrfTokenRepository()).and()
 					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
