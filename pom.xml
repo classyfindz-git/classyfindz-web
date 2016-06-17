@@ -32,7 +32,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
-		<dependency>
+        <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
@@ -45,6 +45,11 @@
 		    <artifactId>commons-collections</artifactId>
 		    <version>3.2.2</version>
 		</dependency>
+		<dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<properties>
@@ -129,7 +134,11 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-		</plugins>
+			<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            </plugins>
 	</build>
 
 </project>

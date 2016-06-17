@@ -11,8 +11,7 @@
     	  $scope.getLocation = function(val) {
     	    return $http.get('//1columnwide.net.nz/public/services/tags', {
     	      params: {
-    	        address: val,
-    	        sensor: false
+    	        tagPart: val
     	      }
     	    }).then(function(response){
     	      return response.data.results.map(function(item){
