@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import nz.co.ritc.classyfindz.api.resource.TagEntry;
  * @author rahul
  *
  */
+@Component
 @RestController
 public class TagEntryService {
 
