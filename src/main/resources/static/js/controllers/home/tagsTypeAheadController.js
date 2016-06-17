@@ -14,7 +14,7 @@
     	        tagPart: val
     	      }
     	    }).then(function(response){
-    	      return response.data.results.map(function(item){
+    	      return response.data.map(function(item){
     	        return item.text;
     	      });
     	    });
