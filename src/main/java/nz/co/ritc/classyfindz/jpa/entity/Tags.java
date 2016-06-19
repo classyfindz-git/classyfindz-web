@@ -20,6 +20,7 @@ public class Tags {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="tag_id")
 	private long id;
 	@Column(name="tag_name")
 	private String tagName;
