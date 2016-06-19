@@ -1,4 +1,4 @@
-angular.module('1columnwide', [ 'ngRoute', 'ui.bootstrap' ]).config(function($routeProvider, $httpProvider) {
+angular.module('1columnwide', [ 'ngRoute', 'ui.bootstrap', 'ngResource' ]).config(function($routeProvider, $httpProvider) {
     var viewBase = '/js/views/';
 
 	$routeProvider.when('/login', {
