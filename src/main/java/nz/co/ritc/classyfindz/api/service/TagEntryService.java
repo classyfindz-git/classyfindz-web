@@ -38,7 +38,7 @@ public class TagEntryService {
 		try {
 			final ResultSet results = dataSource.getConnection()
 				.prepareStatement("SELECT TAG_NAME FROM tags"
-						+ " WHERE TAG_NAME LIKE %" + tagPart + "%"
+						+ " WHERE TAG_NAME LIKE " + StringUtils.quote("%" + tagPart + "%")
 						+ " ORDER BY TAG_NAME"
 						+ " LIMIT 5")
 				.executeQuery();
