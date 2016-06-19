@@ -10,12 +10,19 @@
 		</form>
 	</nav>
  	<div class="jumbotron">
-		<div class='container-fluid typeahead-searchTags' ng-controller="tagsTypeAhead">
-		    <input type="text" ng-model="tagSelected" placeholder="Search keywords.." uib-typeahead="" typeahead-loading="loadingTags" typeahead-no-results="noTagResults" class="form-control">
-		    <i ng-show="loadingTags" class="glyphicon glyphicon-refresh"></i>
-		    <div ng-show="noTagResults">
-		      <i class="glyphicon glyphicon-remove"></i> No Results Found
-		    </div>
+		<div class='container-fluid typeahead-demo' ng-controller="tagsTypeAhead">
+			<div class="row">
+			  <div class="col-md-4"></div>
+			  <div class="col-md-4">
+			    <input type="text" ng-model="tagsSelected" placeholder="Search keywords..." 
+			    	uib-typeahead="tagPart for tagPart in getTags($viewValue)" typeahead-loading="loadingTags" typeahead-no-results="noResults" class="form-control">
+			    <i ng-show="loadingTags" class="glyphicon glyphicon-refresh"></i>
+			    <div ng-show="noResults">
+			      <i class="glyphicon glyphicon-remove"></i> No Results Found
+			    </div>
+			  </div>
+			  <div class="col-md-4"></div>
+			</div>		
 		</div>
       </div>
     </div>

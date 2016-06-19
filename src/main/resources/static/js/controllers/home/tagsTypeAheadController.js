@@ -6,8 +6,7 @@
     	  var _selected;
 
     	  $scope.selected = undefined;
-    	  // Any function returning a promise object can be used to load values asynchronously
-    	  $scope.getLocation = function(val) {
+    	  $scope.getTags = function(val) {
     	    return $http.get('//1columnwide.net.nz/public/services/tags', {
     	      params: {
     	        tagPart: val
