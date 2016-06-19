@@ -37,8 +37,8 @@ public class TagEntryService {
 		final List<TagEntry> tags = new ArrayList<TagEntry>();
 		try {
 			final ResultSet results = dataSource.getConnection()
-				.prepareStatement("SELECT TAG_NAME FROM TAGS"
-						+ " WHERE TAG_NAME REGEX " + StringUtils.quote("*" + tagPart + "*")
+				.prepareStatement("SELECT TAG_NAME FROM tags"
+						+ " WHERE TAG_NAME LIKE %" + tagPart + "%"
 						+ " ORDER BY TAG_NAME"
 						+ " LIMIT 5")
 				.executeQuery();
@@ -58,14 +58,15 @@ public class TagEntryService {
 	public void creatTag(@RequestParam(value="tagText")final String  tagName) {
 		try {
 			final String tagLowerCase = StringUtils.uncapitalize(tagName);
-			final String colMD5 = new String(MessageDigest.getInstance("MD5").digest(tagLowerCase.getBytes()));
+			final MessageDigest _MD5 = MessageDigest.getInstance("MD5");
+			final String colMD5 = new String(_MD5.digest(tagLowerCase.getBytes()));
 			final ResultSet resultSet = dataSource.getConnection()
-				.prepareStatement("SELECT COUNT(*) FROM TAGS"
+				.prepareStatement("SELECT COUNT(*) FROM tags"
 					+ " WHERE MD5_CHECKSUM = " + StringUtils.quote(colMD5))
 				.executeQuery();
 			if (!resultSet.next()) {
 				dataSource.getConnection()
-						.prepareStatement("INSERT INTO TAGS (tag_name,md5_checksum)"
+						.prepareStatement("INSERT INTO tags (TAG_NAME,MD5_CHECKSUM)"
 								+ " VALUES("
 								+ StringUtils.quote(tagLowerCase)
 								+ StringUtils.quote(colMD5)
