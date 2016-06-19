@@ -19,5 +19,5 @@ hibernate:
     auto: create-drop
   ejb:
     naming_strategy: 'org.hibernate.cfg.ImprovedNamingStrategy'
-  show_sql: false
+  show_sql: true
   format_sql: true 
