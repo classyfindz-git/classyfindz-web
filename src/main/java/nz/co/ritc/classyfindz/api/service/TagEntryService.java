@@ -37,9 +37,10 @@ public class TagEntryService {
 		final List<TagEntry> tags = new ArrayList<TagEntry>();
 		try {
 			final ResultSet results = dataSource.getConnection()
-				.prepareStatement("SELECT TOP 5 TAG_NAME FROM TAGS"
+				.prepareStatement("SELECT TAG_NAME FROM TAGS"
 						+ " WHERE TAG_NAME REGEX " + StringUtils.quote("*" + tagPart + "*")
-						+ " ORDER BY TAG_NAME")
+						+ " ORDER BY TAG_NAME"
+						+ " LIMIT 5")
 				.executeQuery();
 			while (results.next()) {
 				final TagEntry tagEntry = new TagEntry();
