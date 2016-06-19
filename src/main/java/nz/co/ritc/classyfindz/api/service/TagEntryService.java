@@ -43,12 +43,12 @@ public class TagEntryService {
 		logger.debug("Search for " + tagPart);
 		return 
 		(List<TagEntry>) CollectionUtils.collect(
-				tagsRepository.findByTag_nameLike(tagPart, createPageRequest()), 
+				tagsRepository.findByTagNameLike(tagPart, createPageRequest()), 
 				new Transformer() {
 					@Override
 					public Object transform(Object input) {
 						final TagEntry test = new TagEntry();
-						test.setText(((Tags)input).getTag_name());
+						test.setText(((Tags)input).getTagName());
 						return test;
 					}
 				});

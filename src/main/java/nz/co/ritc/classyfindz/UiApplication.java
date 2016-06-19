@@ -88,7 +88,16 @@ public class UiApplication extends SpringBootServletInitializer {
 
 		return factory.getObject();
 	}
-
+	
+	@ConfigurationProperties(prefix = "hibernate")
+	@Bean
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        transactionManager.setDataSource(dataSource());
+        return transactionManager;
+    }
+	
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		final JpaTransactionManager txManager = new JpaTransactionManager();

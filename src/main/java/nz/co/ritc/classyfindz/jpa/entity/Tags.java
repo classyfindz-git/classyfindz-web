@@ -3,6 +3,7 @@
  */
 package nz.co.ritc.classyfindz.jpa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +21,10 @@ public class Tags {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	private String tag_name;
-	private String md5_checksum;
+	@Column(name="tag_name")
+	private String tagName;
+	@Column(name="md5_checksum")
+	private String md5Checksum;
 
 	public long getId() {
 		return id;
@@ -30,22 +32,22 @@ public class Tags {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getTag_name() {
-		return tag_name;
+	public String getTagName() {
+		return tagName;
 	}
-	public void setTag_name(String tag_name) {
-		this.tag_name = tag_name;
+	public void setTagName(String tag_name) {
+		this.tagName = tag_name;
 	}
-	public String getMd5_checksum() {
-		return md5_checksum;
+	public String getMd5Checksum() {
+		return md5Checksum;
 	}
-	public void setMd5_checksum(String md5_checksum) {
-		this.md5_checksum = md5_checksum;
+	public void setMd5Checksum(String md5_checksum) {
+		this.md5Checksum = md5_checksum;
 	}
 
 	@Override
 	public String toString() {
-		return "Tags [id=" + id + ", tag_name=" + tag_name + ", md5_checksum=" + md5_checksum + "]";
+		return "Tags [id=" + id + ", tag_name=" + tagName + ", md5_checksum=" + md5Checksum + "]";
 	}
 
 }

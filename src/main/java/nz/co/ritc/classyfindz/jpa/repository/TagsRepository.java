@@ -16,5 +16,5 @@ import nz.co.ritc.classyfindz.jpa.entity.Tags;
  */
 public interface TagsRepository extends PagingAndSortingRepository<Tags, Long> {
 
-	public List<Tags> findByTag_nameLike(String tag_name, Pageable pageable);
+	public List<Tags> findByTagNameLike(String tagName, Pageable pageable);
 }
