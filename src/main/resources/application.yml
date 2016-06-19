@@ -2,6 +2,9 @@ logging:
   level:
     org.springframework.security: DEBUG
     nz.co.ritc.classyfindz: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: DEBUG
+    org.hibernate.tool.hbm2ddl: DEBUG    
 #JDBC
 jdbc:
   driverClassName: 'com.mysql.jdbc.Driver'
