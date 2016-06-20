@@ -14,7 +14,7 @@ jdbc:
   
 #Hibernate Configuration
 hibernate:
-  dialect: 'org.hibernate.dialect.H2Dialect'
+  dialect: 'org.hibernate.dialect.MySQLDialect'
   hbm2ddl:
     auto: create-drop
   ejb:
