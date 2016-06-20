@@ -14,6 +14,8 @@
 		<label class="sr-only" for="password">Password:</label> 
 		<input type="password" class="form-control" id="password" name="password" ng-model="credentials.password" placeholder="Password"/>
 	  </div>
- 	  <button type="submit" class="btn btn-default">Sign in</button>
+	  <a ui-sref="home" class="btn btn-danger navbar-btn"  role="button" >Sign In</a>
 	</form>
 </nav>
+<a ui-sref="home.search">Show Search</a>
+<div ui-view></div>
