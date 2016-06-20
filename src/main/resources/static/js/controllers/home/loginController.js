@@ -9,6 +9,7 @@
 		};
 
 		var authenticate = function(credentials, callback) {
+
 			var headers = credentials ? {
 				authorization : "Basic "
 						+ btoa(credentials.username + ":"
@@ -38,14 +39,14 @@
 			authenticate($scope.credentials, function(authenticated) {
 				if (authenticated) {
 					console.log("Login succeeded")
+					$location.path("/home");
 					$scope.error = false;
 					$rootScope.authenticated = true;
-					$location.state("/home");
 				} else {
 					console.log("Login failed")
+					$location.path("/login");
 					$scope.error = true;
 					$rootScope.authenticated = false;
-					$location.state("/login");
 				}
 			})
 		};
