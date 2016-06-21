@@ -30,7 +30,6 @@
 
     	  $scope.addToTagList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
-    		//$state.go('login.search.tags', {}, {reload: true});
     	  };
 
     	}
