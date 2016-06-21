@@ -3,7 +3,7 @@
 			<div class="row">
 			  <div class="col-md-4"></div>
 		      <div class="col-xs-12 col-md-4">
-			    <input type="text" ng-model="tagsSelected" placeholder="Search keywords..." 
+			    <input type="text" ng-model="tagsSelected" ng-change="addToTagsList($$tagsSelected)" placeholder="Search keywords..." 
 			    	uib-typeahead="tagPart for tagPart in getTags($viewValue)" typeahead-loading="loadingTags" typeahead-no-results="noResults" class="form-control">
 			    <i ng-show="loadingTags" class="glyphicon glyphicon-refresh"></i>
 			    <div ng-show="noResults">
@@ -11,6 +11,14 @@
 			    </div>
 		      </div>
 			  <div class="col-md-4"></div>
+			</div>		
+			<div class="row">
+			  <div class="col-md-2"></div>
+			  <div class="col-md-8">
+				<a ui-sref="login.search.tags" class="ng-hide"></a>
+			    <div ui-view></div>
+			  </div>
+			  <div class="col-md-2"></div>
 			</div>		
 		</div>
       </div>

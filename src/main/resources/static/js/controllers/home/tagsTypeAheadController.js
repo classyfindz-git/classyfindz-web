@@ -5,6 +5,8 @@
     var TagsTypeAheadController = function($scope, $http) {
     	  var _selected;
 
+    	  $scope.tagsList= [];
+    	  
     	  $scope.selected = undefined;
     	  $scope.getTags = function(val) {
     	    return $http.get('//1columnwide.net.nz/public/services/tags', {
@@ -25,6 +27,10 @@
     	    },
     	    getterSetter: true
     	  };
+
+    	  $scope.addToTagsList = function($tagsSelected) {
+    		  $scope.tagsList.push($tagsSelected);
+    	  }
 
     	}
     TagsTypeAheadController.$inject = injectParams;
