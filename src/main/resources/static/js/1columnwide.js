@@ -22,7 +22,11 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
       }
     })
     .state('login.search.tags', {
-      templateUrl: partialsBase + "home/selected-tags.html"
+      views: {
+    	  "login-search-tags": {
+    	      templateUrl: partialsBase + "home/selected-tags.html"
+    	  }
+      }
     })
 	.state('home', {
       url: "/home",
@@ -34,7 +38,17 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
     })
     .state('home.search', {
       templateUrl: partialsBase + "home/search-tags.html",
-      controller: 'tagsTypeAhead'
+      controller: 'tagsTypeAhead',
+      params: {
+          autoActivateChild: 'home.search.tags'
+      }
+    })
+    .state('home.search.tags', {
+        views: {
+      	  "home-search-tags": {
+              templateUrl: partialsBase + "home/selected-tags.html"
+      	  }
+        }
     });
 
 	// 
