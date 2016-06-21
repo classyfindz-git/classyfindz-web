@@ -9,7 +9,8 @@
     	  
     	  $scope.selected = undefined;
     	  $scope.getTags = function(val) {
-    	    return $http.get('//1columnwide.net.nz/public/services/tags', {
+//    		  return val + 'hello';
+    		  return $http.get('//1columnwide.net.nz/public/services/tags', {
     	      params: {
     	        tagPart: val
     	      }
@@ -32,6 +33,9 @@
     		$scope.tagsList.push($model);
     	  };
 
+    	  $scope.removeFromTagList = function(index) {
+    	      $scope.tagsList.splice(index, 1);
+      	  };
     	}
     TagsTypeAheadController.$inject = injectParams;
 
