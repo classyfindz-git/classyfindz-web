@@ -29,7 +29,7 @@
     	  };
 
     	  $scope.addToTagsList = function(tagsSelected) {
-    		  $scope.tagsList.push($tagsSelected);
+    		  $scope.tagsList.push(tagsSelected);
     	  }
 
     	}
