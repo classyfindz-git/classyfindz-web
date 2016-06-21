@@ -28,7 +28,7 @@
     	    getterSetter: true
     	  };
 
-    	  $scope.addToTagsList = function($tagsSelected) {
+    	  $scope.addToTagsList = function(tagsSelected) {
     		  $scope.tagsList.push($tagsSelected);
     	  }
 
