@@ -29,7 +29,8 @@
     	  };
 
     	  $scope.addToTagsList = function(tagsSelected) {
-    		  $scope.tagsList.push(tagsSelected);
+    		  if(typeof tagsSelected !== "undefined")
+    			  $scope.tagsList.push(tagsSelected);
     	  }
 
     	}
