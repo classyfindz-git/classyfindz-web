@@ -1,8 +1,8 @@
 (function () {
 
-    var injectParams = ['$scope', '$http'];
+    var injectParams = ['$scope', '$http', '$state'];
 
-    var TagsTypeAheadController = function($scope, $http) {
+    var TagsTypeAheadController = function($scope, $http, $state) {
     	  var _selected;
 
     	  $scope.tagsList= [];
@@ -28,8 +28,9 @@
     	    getterSetter: true
     	  };
 
-    	  $scope.addToTagsList = function($item, $model, $label) {
+    	  $scope.addToTagList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
+    		$state.go('login.search.tags', {}, {reload: true});
     	  };
 
     	}
