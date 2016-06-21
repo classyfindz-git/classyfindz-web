@@ -28,9 +28,8 @@
     	    getterSetter: true
     	  };
 
-    	  $scope.addToTagsList = function(tagsSelected) {
-    		  if(typeof tagsSelected !== "undefined")
-    			  $scope.tagsList.push(tagsSelected);
+    	  $scope.addToTagsList = function($item, $model, $label) {
+    		$scope.tagsList.push($model);
     	  }
 
     	}

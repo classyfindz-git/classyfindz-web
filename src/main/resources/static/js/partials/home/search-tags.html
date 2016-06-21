@@ -4,7 +4,8 @@
 			  <div class="col-md-4"></div>
 		      <div class="col-xs-12 col-md-4">
 			    <input type="text" ng-model="tagsSelected" ng-change="addToTagsList(tagsSelected)" placeholder="Search keywords..." 
-			    	uib-typeahead="tagPart for tagPart in getTags($viewValue)" typeahead-loading="loadingTags" typeahead-no-results="noResults" class="form-control">
+			    	uib-typeahead="tagPart for tagPart in getTags($viewValue)" typeahead-loading="loadingTags" typeahead-no-results="noResults" 
+			    	typeahead-on-select="addToTagList($item, $model, $label)" class="form-control">
 			    <i ng-show="loadingTags" class="glyphicon glyphicon-refresh"></i>
 			    <div ng-show="noResults">
 			      <i class="glyphicon glyphicon-remove"></i>No Results Found
