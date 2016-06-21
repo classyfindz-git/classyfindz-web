@@ -30,7 +30,7 @@
 
     	  $scope.addToTagsList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
-    	  }
+    	  };
 
     	}
     TagsTypeAheadController.$inject = injectParams;
