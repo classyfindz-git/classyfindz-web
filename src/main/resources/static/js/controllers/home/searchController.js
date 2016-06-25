@@ -53,10 +53,28 @@
        	  $scope.selectListingsTab = function($index) {
        	      //$window.alert('You\'ve selected the alert tab!' + $index);
        	  };
-
-       	  $scope.model = {
-       	    name: 'Tabs'
-       	  };
+		  $scope.splitWords = function(string) {
+		    var array = string.split(' ');
+		    return array[0];
+		  }
+      	  $scope.advertList = [
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
+      	      	  	       	  ];
     }
     SearchController.$inject = injectParams;
 

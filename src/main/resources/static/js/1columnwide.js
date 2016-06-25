@@ -32,8 +32,11 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
     	  'login-selected-tags': {
     	      templateUrl: partialsBase + "home/search/selected-tags.html"
     	  },
-    	  'login-listings': {
+    	  'login-tab-categories': {
     	      templateUrl: partialsBase + "home/listings/alpha-num-tabs.html"
+    	  },
+    	  'login-ad-columns': {
+    	      templateUrl: partialsBase + "home/listings/ad-columns.html"
     	  }
       }
     })
@@ -62,8 +65,11 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
     	  'home-selected-tags': {
     	      templateUrl: partialsBase + "home/search/selected-tags.html"
     	  },
-    	  'home-listings': {
+    	  'home-tab-categories': {
     	      templateUrl: partialsBase + "home/listings/alpha-num-tabs.html"
+    	  },
+    	  'home-ad-columns': {
+    	      templateUrl: partialsBase + "home/listings/ad-columns.html"
     	  }
       }
     });
