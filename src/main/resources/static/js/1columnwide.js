@@ -6,9 +6,11 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
 	// For any unmatched url, redirect to /login
 	$urlRouterProvider.otherwise( "/login");
 
-	$stateProvider.state('login', {
+	$stateProvider
+	// VV Public states VV
+	.state('login', {
 	  url: "/login",
-	  templateUrl: partialsBase + "home/login.html",
+	  templateUrl: viewBase + "login.html",
       controller: 'login',
       params: {
           autoActivateChild: 'login.default'
@@ -16,7 +18,7 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
 	})
     .state('login.default', {
   	  url: "/",
-	  templateUrl: partialsBase + "home/login/default.html",
+	  templateUrl: partialsBase + "home/default.html",
       controller: 'search',
       params: {
           autoActivateChild: 'login.default.search'
@@ -35,27 +37,35 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
     	  }
       }
     })
+    // VV Secured states VV
 	.state('home', {
       url: "/home",
-      templateUrl: partialsBase + "home/default.html",
+      templateUrl: viewBase + "secure.html",
       controller: 'home',
       params: {
-          autoActivateChild: 'home.search'
+          autoActivateChild: 'home.default'
       }
     })
-    .state('home.search', {
-      templateUrl: partialsBase + "home/search/search-tags.html",
+    .state('home.default', {
+  	  url: "/",
+	  templateUrl: partialsBase + "home/authenticated.html",
       controller: 'search',
       params: {
-          autoActivateChild: 'home.search.tags'
+          autoActivateChild: 'home.default.search'
       }
     })
-    .state('home.search.tags', {
-        views: {
-      	  "home-search-tags": {
-              templateUrl: partialsBase + "home/search/selected-tags.html"
-      	  }
-        }
+    .state('home.default.search', {
+      views: {
+    	  'home-search-tags': {
+    	      templateUrl: partialsBase + "home/search/search-tags.html"
+    	  },
+    	  'home-selected-tags': {
+    	      templateUrl: partialsBase + "home/search/selected-tags.html"
+    	  },
+    	  'home-listings': {
+    	      templateUrl: partialsBase + "home/listings/alpha-num-tabs.html"
+    	  }
+      }
     });
 
 	// 
@@ -73,5 +83,3 @@ app.run(function($rootScope,$state) {
 	    }
 	});
 });
-
-
