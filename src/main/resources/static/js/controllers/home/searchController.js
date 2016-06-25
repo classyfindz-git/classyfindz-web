@@ -1,8 +1,8 @@
 (function () {
 
-    var injectParams = ['$scope', '$http', '$state'];
+    var injectParams = ['$scope', '$http', '$state','$window'];
 
-    var TagsTypeAheadController = function($scope, $http, $state) {
+    var SearchController = function($scope, $http, $state, $window) {
     	  var _selected;
 
     	  $scope.tagsList= [];
@@ -36,9 +36,24 @@
     	  $scope.removeFromTagList = function(index) {
     	      $scope.tagsList.splice(index, 1);
       	  };
-    	}
-    TagsTypeAheadController.$inject = injectParams;
 
-    angular.module('1columnwide').controller('tagsTypeAhead', TagsTypeAheadController);
+      	  $scope.tabs = [
+      	  	       	    { title:'Dynamic Title 1', content:'Dynamic content 1' },
+      	  	       	    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+      	  	       	  ];
+
+      	  	       	  $scope.alertMe = function() {
+      	  	       	    setTimeout(function() {
+      	  	       	      $window.alert('You\'ve selected the alert tab!');
+      	  	       	    });
+      	  	       	  };
+
+      	  	       	  $scope.model = {
+      	  	       	    name: 'Tabs'
+      	  	       	  };
+    }
+    SearchController.$inject = injectParams;
+
+    angular.module('1columnwide').controller('search', SearchController);
 
 }());

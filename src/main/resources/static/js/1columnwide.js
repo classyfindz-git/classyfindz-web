@@ -11,34 +11,41 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
 	  templateUrl: partialsBase + "home/login.html",
       controller: 'login',
       params: {
-          autoActivateChild: 'login.search'
+          autoActivateChild: 'login.default'
       }
 	})
-    .state('login.search', {
-      templateUrl: partialsBase + "home/search-tags.html",
-      controller: 'tagsTypeAhead',
+    .state('login.default', {
+  	  url: "/",
+	  templateUrl: partialsBase + "home/login/default.html",
+      controller: 'search',
       params: {
-          autoActivateChild: 'login.search.tags'
+          autoActivateChild: 'login.default.search'
       }
     })
-    .state('login.search.tags', {
+    .state('login.default.search', {
       views: {
-    	  "login-search-tags": {
-    	      templateUrl: partialsBase + "home/selected-tags.html"
+    	  'login-search-tags': {
+    	      templateUrl: partialsBase + "home/search/search-tags.html"
+    	  },
+    	  'login-selected-tags': {
+    	      templateUrl: partialsBase + "home/search/selected-tags.html"
+    	  },
+    	  'login-listings': {
+    	      templateUrl: partialsBase + "home/listings/alpha-num-tabs.html"
     	  }
       }
     })
 	.state('home', {
       url: "/home",
-      templateUrl: partialsBase + "home/home.html",
+      templateUrl: partialsBase + "home/default.html",
       controller: 'home',
       params: {
           autoActivateChild: 'home.search'
       }
     })
     .state('home.search', {
-      templateUrl: partialsBase + "home/search-tags.html",
-      controller: 'tagsTypeAhead',
+      templateUrl: partialsBase + "home/search/search-tags.html",
+      controller: 'search',
       params: {
           autoActivateChild: 'home.search.tags'
       }
@@ -46,7 +53,7 @@ var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap'
     .state('home.search.tags', {
         views: {
       	  "home-search-tags": {
-              templateUrl: partialsBase + "home/selected-tags.html"
+              templateUrl: partialsBase + "home/search/selected-tags.html"
       	  }
         }
     });
