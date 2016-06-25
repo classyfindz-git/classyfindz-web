@@ -8,6 +8,8 @@
     	  $scope.tagsList= [];
     	  
     	  $scope.selected = undefined;
+
+    	  // Auto-complete function to get list of tags starting with user entries
     	  $scope.getTags = function(val) {
 //    		  return val + 'hello';
     		  return $http.get('//1columnwide.net.nz/public/services/tags', {
@@ -20,7 +22,6 @@
     	      });
     	    });
     	  };
-
     	  $scope.modelOptions = {
     	    debounce: {
     	      default: 500,
@@ -28,29 +29,34 @@
     	    },
     	    getterSetter: true
     	  };
+    	  // End Auto-complete behavior
 
+    	  // Selected tags badges
     	  $scope.addToTagList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
     	  };
-
     	  $scope.removeFromTagList = function(index) {
     	      $scope.tagsList.splice(index, 1);
       	  };
+    	  // End selected tags badges
 
-      	  $scope.tabs = [
-      	  	       	    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-      	  	       	    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+      	  $scope.listingsTabs = [
+      	  	       	    { title:'A-B-C-D', size: 33  },
+      	  	       	    { title:'E-F-G-H', size: 33 },
+      	  	       	    { title:'I-J-K-L', size: 33  },
+      	  	       	    { title:'M-N-O-P-Q', size: 33  },
+      	  	       	    { title:'R-S-T-U', size: 0  },
+      	  	       	    { title:'V-W-X-Y-Z', size: 33  },
+      	  	       	    { title:'0-9 !-@-#-$-%-^-&-*', size: 33  }
       	  	       	  ];
 
-      	  	       	  $scope.alertMe = function() {
-      	  	       	    setTimeout(function() {
-      	  	       	      $window.alert('You\'ve selected the alert tab!');
-      	  	       	    });
-      	  	       	  };
+       	  $scope.selectListingsTab = function($index) {
+       	      //$window.alert('You\'ve selected the alert tab!' + $index);
+       	  };
 
-      	  	       	  $scope.model = {
-      	  	       	    name: 'Tabs'
-      	  	       	  };
+       	  $scope.model = {
+       	    name: 'Tabs'
+       	  };
     }
     SearchController.$inject = injectParams;
 
