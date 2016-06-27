@@ -1,49 +1,54 @@
-<div class="panel panel-danger">
-	<div class="panel-heading"> </div>
-	<p/>
 	<div class="container-fluid">
 	  <div class="row">
-		<div class="col-xs-12 col-md-2" ng-repeat="columnAdvert in advertList">
-			<div class="panel panel-info">
-				<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
-					<span class="glyphicon glyphicon-fullscreen" style="padding-right: 10%" aria-hidden="true"></span>
-
-					<span class="glyphicon glyphicon-camera" style="padding-right: 10%" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-facetime-video" style="padding-right: 10%" aria-hidden="true"></span>
-
-
-					<span class="glyphicon glyphicon-earphone" style="padding-right: 10%" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-				</div>
+		<div class="col-xs-12" ng-repeat="(category, columnAds) in advertList">
+			<div class="panel panel-danger">
+				<div class="panel-heading">{{category}}</div>
 				<p/>
-
 				<div class="container-fluid">
 				  <div class="row">
-					<div class="col-xs-10 col-md-10">
-						<!-- The Heading with highights -->
-						<div ng-init="words = columnAdvert.heading.split(' ')">
-						<h6><b ng-repeat="word in words"><mark ng-show="tagList.indexOf(word) == -1">{{word}} </mark><span ng-hide="tagList.indexOf(word) == -1">{{word}} </span></b></h6>
+ 					<div class="col-xs-12 col-md-2" ng-repeat="columnAdvert in columnAds">
+						<div class="panel panel-success">
+							<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
+								<span class="glyphicon glyphicon-fullscreen" style="padding-right: 10%" aria-hidden="true"></span>
+			
+								<span class="glyphicon glyphicon-camera" style="padding-right: 10%" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-facetime-video" style="padding-right: 10%" aria-hidden="true"></span>
+			
+			
+								<span class="glyphicon glyphicon-earphone" style="padding-right: 10%" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+							</div>
+							<p/>
+			
+							<div class="container-fluid">
+							  <div class="row">
+								<div class="col-xs-10 col-md-10">
+									<div ng-init="words = columnAdvert.heading.split(' ')">
+									<h6><b ng-repeat="word in words"><mark ng-show="tagList.indexOf(word) == -1">{{word}} </mark><span ng-hide="tagList.indexOf(word) == -1">{{word}} </span></b></h6>
+									</div>
+								</div>
+								<div class="col-xs-2 col-md-2">
+									<span class="glyphicon glyphicon-wrench" aria-hidden="true" ng-click="columnAdvert.showTools = ! columnAdvert.showTools" ng-show="!columnAdvert.showTools"></span>
+									<span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-click="columnAdvert.showTools = ! columnAdvert.showTools" ng-show="columnAdvert.showTools"></span>
+								</div>
+							  </div>
+							  <div class="row">
+								<div class="col-xs-12">
+									<h5><small>{{columnAdvert.text}}</small></h5>
+								</div>
+							  </div>
+							</div>
+			
+							<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
+								<span class="glyphicon glyphicon-pushpin"  style="padding-right: 10%" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+							</div>
 						</div>
 					</div>
-					<div class="col-xs-2 col-md-2">
-						<span class="glyphicon glyphicon-wrench" aria-hidden="true" ng-click="columnAdvert.showTools = ! columnAdvert.showTools" ng-show="!columnAdvert.showTools"></span>
-						<span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-click="columnAdvert.showTools = ! columnAdvert.showTools" ng-show="columnAdvert.showTools"></span>
-					</div>
 				  </div>
-				  <div class="row">
-					<div class="col-xs-12">
-						<h5><small>{{columnAdvert.text}}</small></h5>
-					</div>
-				  </div>
-				</div>
-
-				<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
-					<span class="glyphicon glyphicon-tag"  style="padding-right: 10%" aria-hidden="true"></span>
-					<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
 				</div>
 			</div>
 		</div>
 	  </div>
 	</div>
-  <div class="panel-footer"></div>
-</div>
+			

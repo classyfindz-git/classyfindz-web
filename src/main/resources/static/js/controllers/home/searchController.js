@@ -57,24 +57,29 @@
 		    var array = string.split(' ');
 		    return array[0];
 		  }
-      	  $scope.advertList = [
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	      	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-      	      	  	       	  ];
+      	  $scope.advertList = {
+      			  'Category A' : [
+     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
+     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
+     	  	       	  ],      	  
+          			  'Category B' : [
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
+          	     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  }
+          	     	  	       	  ]      	  
+
+      	  };
     }
     SearchController.$inject = injectParams;
 
