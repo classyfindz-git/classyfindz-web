@@ -1,4 +1,10 @@
-var app = angular.module('1columnwide', [  'ngRoute','ui.router', 'ui.bootstrap', 'ngResource' ])
+var app = angular.module('1columnwide', [  
+                                           'ngRoute',
+                                           'ui.router', 
+                                           'ui.bootstrap', 
+                                           'ngResource' ,
+                                           'ui.scroll', 
+                                           'ui.scroll.jqlite'])
 		.config(function($routeProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
     
 	var viewBase = '/js/views/';

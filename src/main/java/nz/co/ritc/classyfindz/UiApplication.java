@@ -122,7 +122,7 @@ public class UiApplication extends SpringBootServletInitializer {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.httpBasic().and().authorizeRequests()
-					.antMatchers("/index.html", "/default.html", "/login.html", 
+					.antMatchers("/index.html", "/default.html", "/login.html", "/adapter.html", 
 							"/static/**", "/bower_components/**", "/css/**", "/public/**", "/resource/**", 
 							"/login", "/logout", "/")
 					.permitAll().anyRequest().authenticated().and().csrf().csrfTokenRepository(csrfTokenRepository())

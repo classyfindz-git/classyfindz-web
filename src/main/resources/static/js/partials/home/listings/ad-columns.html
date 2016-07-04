@@ -1,25 +1,29 @@
-	<div class="container-fluid">
-	  <div class="row">
-		<div class="col-xs-12" ng-repeat="(category, columnAds) in advertList">
+<div class='panel panel-default'>
+	<div class="container-fluid panel-body">
+ 	  <div class="row">
+		<div class="col-xs-12" >
+			<h6><small><uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination></small></h6>
+		</div>
+	  </div>
+ 	  <div class="row">
+		<div class="col-xs-12 col-md-4" ng-repeat="(category, columnAdsDatasource) in advertList">
 			<div class="panel panel-danger">
-				<div class="panel-heading">{{category}}</div>
-				<p/>
+				<div class="panel-heading"><b>{{category}}</b></div>
 				<div class="container-fluid">
-				  <div class="row">
- 					<div class="col-xs-12 col-md-2" ng-repeat="columnAdvert in columnAds">
+				  <div class="row advert-viewport" ui-scroll-viewport>
+ 					<div class="advert-item col-xs-12 col-md-6" ui-scroll="columnAdvert in advertListDatasource">
+ 						<p/>
 						<div class="panel panel-success">
 							<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
 								<span class="glyphicon glyphicon-fullscreen" style="padding-right: 10%" aria-hidden="true"></span>
-			
+
 								<span class="glyphicon glyphicon-camera" style="padding-right: 10%" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-facetime-video" style="padding-right: 10%" aria-hidden="true"></span>
-			
-			
+
 								<span class="glyphicon glyphicon-earphone" style="padding-right: 10%" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 							</div>
 							<p/>
-			
 							<div class="container-fluid">
 							  <div class="row">
 								<div class="col-xs-10 col-md-10">
@@ -38,7 +42,6 @@
 								</div>
 							  </div>
 							</div>
-			
 							<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">
 								<span class="glyphicon glyphicon-pushpin"  style="padding-right: 10%" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -50,5 +53,6 @@
 			</div>
 		</div>
 	  </div>
+	
 	</div>
-			
+</div>	
