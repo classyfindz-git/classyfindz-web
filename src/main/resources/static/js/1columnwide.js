@@ -4,7 +4,8 @@ var app = angular.module('1columnwide', [
                                            'ui.bootstrap', 
                                            'ngResource' ,
                                            'ui.scroll', 
-                                           'ui.scroll.jqlite'])
+                                           'ui.scroll.jqlite',
+                                           'angular-md5'])
 		.config(function($routeProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
     
 	var viewBase = '/js/views/';

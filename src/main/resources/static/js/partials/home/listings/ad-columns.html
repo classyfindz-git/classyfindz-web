@@ -6,12 +6,14 @@
 		</div>
 	  </div>
  	  <div class="row">
-		<div class="col-xs-12 col-md-4" ng-repeat="(category, columnAdsDatasource) in advertList">
+		<div class="col-xs-12 col-md-3" ng-repeat="category in advertList">
 			<div class="panel panel-danger">
 				<div class="panel-heading"><b>{{category}}</b></div>
 				<div class="container-fluid">
 				  <div class="row advert-viewport" ui-scroll-viewport>
- 					<div class="advert-item col-xs-12 col-md-6" ui-scroll="columnAdvert in advertListDatasource">
+
+ 					<div class="advert-item col-xs-12" adapter="adapterService(category)" 
+ 						ui-scroll="columnAdvert in advertListDatasourceService(category)" buffer-size='5'>
  						<p/>
 						<div class="panel panel-success">
 							<div ng-show="columnAdvert.showTools" style="padding-left: 10%;padding-right: 10%">

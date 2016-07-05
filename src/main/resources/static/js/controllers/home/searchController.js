@@ -1,8 +1,8 @@
 (function () {
 
-    var injectParams = ['$scope', '$http', '$state', '$window', '$log', '$timeout'];
+    var injectParams = ['$scope', '$http', '$state', '$window', '$log', '$timeout', 'md5'];
 
-    var SearchController = function($scope, $http, $state, $window, console, $timeout) {
+    var SearchController = function($scope, $http, $state, $window, console, $timeout, md5) {
     	  var _selected;
 
     	  $scope.tagsList= [];
@@ -62,54 +62,60 @@
       	  	       	    { title:'Alphabetical', size: 33  },
       	  	       	    { title:'Geographical', size: 33 }
       	  	       	  ];
-      	  $scope.advertList = {
-      			  	'Category A' : [
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-     	  	       	],      	  
-          			'Category B' : [
-     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "So lets  try to sell something here.."  }
-          	     	],
-				  	'Category C' : [
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-			     	  	       	],      	  
-      			  	'Category D' : [
-      		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-      		     	  	       	],      	  
-      			  	'Category E' : [
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-      	     	  	       	],      	  
-      			  	'Category F' : [
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-      	     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-      	     	  	       	]
+      	  $scope.advertList = ['Category A', 'Category B', 'Category C', 'Category D', 'Category E', 'Category F'];
+      	  $scope.advertsDatabase = {
+      			  	'Category A' : {
+      			  		adverts : [
+     	  	       	    { heading:'My first advert', text: "Category A - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My second advert', text: "Category A - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My third advert', text: "Category A - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My fourth advert', text: "Category A - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My fifth advert', text: "Category A - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My sixth advert', text: "Category A - So lets  try to sell something here.."  }
+     	  	       	]},      	  
+          			'Category B' : {
+      			  		adverts : [
+     	  	       	    { heading:'My first advert', text: "Category B - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My second advert', text: "Category B - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My third advert', text: "Category B - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My fourth advert', text: "Category B - So lets  try to sell something here.."  },
+     	  	       	    { heading:'My fifth advert', text: "Category B - So lets  try to sell something here.."  }
+          	     	]},
+				  	'Category C' : {
+      			  		adverts : [
+			     	  	       	    { heading:'My first advert', text: "Category C - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My second advert', text: "Category C - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My third advert', text: "Category C - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My fourth advert', text: "Category C - So lets  try to sell something here.."  }
+			     	  	       	]},      	  
+      			  	'Category D' : {
+      			  		adverts : [
+      		     	  	       	    { heading:'My first advert', text: "Category D - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My second advert', text: "Category D - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My third advert', text: "Category D - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fourth advert', text: "Category D - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fifth advert', text: "Category D - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My sixth advert', text: "Category D - So lets  try to sell something here.."  }
+      		     	  	       	]},      	  
+      			  	'Category E' : {
+      			  		adverts : [
+      		     	  	       	    { heading:'My first advert', text: "Category E - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My second advert', text: "Category E - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My third advert', text: "Category E - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fourth advert', text: "Category E - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fifth advert', text: "Category E - So lets  try to sell something here.."  }
+      	     	  	       	]},      	  
+      			  	'Category F' : {
+      			  		adverts : [
+      		     	  	       	    { heading:'My first advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My second advert', text: "Category F - So lets  try to sell something here.."  },
+			     	  	       	    { heading:'My third advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fourth advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My fifth advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My sixth advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My seventh advert', text: "Category F - So lets  try to sell something here.."  },
+      		     	  	       	    { heading:'My eight advert', text: "Category F - So lets  try to sell something here.."  },
+      	     	  	       	]}
       	  };
       	  
       	  $scope.totalItems = 64;
@@ -117,35 +123,44 @@
 		  $scope.maxSize = 5;
 		  $scope.bigTotalItems = 175;
 		  $scope.bigCurrentPage = 1;
+		  
+		  $scope.adapterService = function(category) {
+			  var adapter = 'adapter-' + md5.createHash(category);
+			  $scope[adapter] = {
+				      remain: true					  
+			  };
+			  return adapter;
+		  };
 
+		  $scope.advertListDatasourceService = function(category) {
+			  var get = function (index, count, success) {
+					$timeout(function () {
+					    var adapter = $scope.adapterService(category);
+				        var i;
+				        result = [];
+				        for (i = index - 1; i < $scope.advertsDatabase[category].adverts.length; i++) {
+							var advert = $scope.advertsDatabase[category].adverts[i];
+							result.push(advert);
+						}
+				        if (index < 1) {
+					        $scope[adapter].isBOF = function() {
+					        	return true;
+					        };
+					        result = [];
+				        }
+						success(result);
+					}, 100);
+				};
+				return {
+					get: get
+				};
+		  };
     }
     SearchController.$inject = injectParams;
 
+    
     angular.module('1columnwide').controller('search', SearchController);
-    angular.module('1columnwide').factory('advertListDatasource', ['$log', '$timeout', function (console, $timeout) {
-			var get = function (index, count, success) {
-				$timeout(function () {
-					var result = [];
-					var data = [
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  },
-		     	  	       	    { heading:'My first advert', text: "So lets  try to sell something here.."  }
-		     	  	       	];
-					for (var i = index; i <= index + count - 1; i++) {
-						result.push(data[0]);
-					}
-					success(result);
-				}, 100);
-			};
 
-			return {
-				get: get
-			};
-		}
-    ]);
 }());
 
 
