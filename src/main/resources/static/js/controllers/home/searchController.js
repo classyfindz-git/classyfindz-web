@@ -138,15 +138,19 @@
 					    var adapter = $scope.adapterService(category);
 				        var i;
 				        result = [];
-				        for (i = index - 1; i < $scope.advertsDatabase[category].adverts.length; i++) {
-							var advert = $scope.advertsDatabase[category].adverts[i];
-							result.push(advert);
-						}
-				        if (index < 1) {
+				        if (index === -1) {
+				        	result.push($scope.advertsDatabase[category].adverts[0]);
+					        $scope[adapter].isEOF = function() {
+					        	return true;
+					        };
+				        } else if (index > 0) {
+					        for (i = index-1; i < $scope.advertsDatabase[category].adverts.length && i < index + count; i++) {
+								var advert = $scope.advertsDatabase[category].adverts[i];
+								result.push(advert);
+							}
 					        $scope[adapter].isBOF = function() {
 					        	return true;
 					        };
-					        result = [];
 				        }
 						success(result);
 					}, 100);
