@@ -8,6 +8,7 @@
     	  $scope.tagsList= [];
     	  
     	  $scope.selected = undefined;
+      	  $scope.advertsDatabase = {};
 
     	  // Auto-complete function to get list of tags starting with user entries
     	  $scope.getTags = function(val) {
@@ -26,9 +27,11 @@
     	  // Selected tags badges
     	  $scope.addToTagList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
+    		refreshAdvertsDatabase();
     	  };
     	  $scope.removeFromTagList = function(index) {
     	      $scope.tagsList.splice(index, 1);
+      		  refreshAdvertsDatabase();
       	  };
     	  // End selected tags badges
 
@@ -49,66 +52,12 @@
 			  //$log.log('Page changed to: ' + $scope.currentPage);
 		  };
 		  // End category columns pagination
-		  
-      	  $scope.listingsTabs = [
+
+		  $scope.listingsTabs = [
       	  	       	    { title:'All', size: 33  },
       	  	       	    { title:'Alphabetical', size: 33  },
       	  	       	    { title:'Geographical', size: 33 }
       	  	       	  ];
-      	  $scope.advertsDatabase = {
-      			  	'Category A' : {
-      			  		adverts : [
-     	  	       	    { heading:'My first advert', text: "Category A - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "Category A - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My third advert', text: "Category A - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My fourth advert', text: "Category A - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My fifth advert', text: "Category A - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My sixth advert', text: "Category A - So lets  try to sell something here.."  }
-     	  	       	]},      	  
-          			'Category B' : {
-      			  		adverts : [
-     	  	       	    { heading:'My first advert', text: "Category B - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My second advert', text: "Category B - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My third advert', text: "Category B - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My fourth advert', text: "Category B - So lets  try to sell something here.."  },
-     	  	       	    { heading:'My fifth advert', text: "Category B - So lets  try to sell something here.."  }
-          	     	]},
-				  	'Category C' : {
-      			  		adverts : [
-			     	  	       	    { heading:'My first advert', text: "Category C - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My second advert', text: "Category C - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My third advert', text: "Category C - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My fourth advert', text: "Category C - So lets  try to sell something here.."  }
-			     	  	       	]},      	  
-      			  	'Category D' : {
-      			  		adverts : [
-      		     	  	       	    { heading:'My first advert', text: "Category D - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My second advert', text: "Category D - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My third advert', text: "Category D - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fourth advert', text: "Category D - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fifth advert', text: "Category D - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My sixth advert', text: "Category D - So lets  try to sell something here.."  }
-      		     	  	       	]},      	  
-      			  	'Category E' : {
-      			  		adverts : [
-      		     	  	       	    { heading:'My first advert', text: "Category E - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My second advert', text: "Category E - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My third advert', text: "Category E - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fourth advert', text: "Category E - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fifth advert', text: "Category E - So lets  try to sell something here.."  }
-      	     	  	       	]},      	  
-      			  	'Category F' : {
-      			  		adverts : [
-      		     	  	       	    { heading:'My first advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My second advert', text: "Category F - So lets  try to sell something here.."  },
-			     	  	       	    { heading:'My third advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fourth advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My fifth advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My sixth advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My seventh advert', text: "Category F - So lets  try to sell something here.."  },
-      		     	  	       	    { heading:'My eight advert', text: "Category F - So lets  try to sell something here.."  },
-      	     	  	       	]}
-      	  };
       	  
       	  $scope.totalItems = 64;
       	  $scope.currentPage = 4;
@@ -116,6 +65,15 @@
 		  $scope.bigTotalItems = 175;
 		  $scope.bigCurrentPage = 1;
 		  
+    	  $scope.refreshAdvertsDatabase = function() {
+    		  return $http.get('//1columnwide.net.nz/public/services/adverts', {
+    	      params: {
+    	        tags : $scope.tagsList
+    	      }
+    	    }).then(function(response){
+    	    	$scope.advertsDatabase = response.data;
+    	    });
+    	  };
       	  $scope.getAdvertsDatabaseCategoryList = function() {
       		  return Object.keys($scope.advertsDatabase);
       	  };

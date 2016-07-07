@@ -1,17 +1,11 @@
 <div class='panel panel-default'>
 	<div class="container-fluid panel-body">
  	  <div class="row">
-		<div class="col-xs-12" >
-			<h6><small><uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination></small></h6>
-		</div>
-	  </div>
- 	  <div class="row">
 		<div class="col-xs-12 col-md-3" ng-repeat="category in getAdvertsDatabaseCategoryList()">
 			<div class="panel panel-danger">
 				<div class="panel-heading"><b>{{category}}</b></div>
 				<div class="container-fluid">
 				  <div class="row advert-viewport" ui-scroll-viewport>
-
  					<div class="advert-item col-xs-12" adapter="adapterService(category)" 
  						ui-scroll="columnAdvert in advertListDatasourceService(category)" buffer-size='3'>
  						<p/>
@@ -56,5 +50,10 @@
 		</div>
 	  </div>
 	
+ 	  <div class="row">
+		<div class="col-xs-12" >
+			<h6><small><uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination></small></h6>
+		</div>
+	  </div>
 	</div>
 </div>	
