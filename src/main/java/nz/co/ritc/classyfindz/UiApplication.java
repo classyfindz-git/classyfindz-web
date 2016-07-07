@@ -49,7 +49,7 @@ import org.springframework.web.util.WebUtils;
 @ComponentScan
 @EnableAutoConfiguration
 @RestController
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="*")
 @EnableJpaRepositories
 @EnableTransactionManagement
 public class UiApplication extends SpringBootServletInitializer {

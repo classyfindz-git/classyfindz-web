@@ -27,7 +27,7 @@ import nz.co.ritc.classyfindz.jpa.repository.TagsRepository;
  */
 @Component
 @RestController
-@CrossOrigin(origins="http://localhost:8080")
+@CrossOrigin(origins="*")
 public class TagEntryService {
 
 	Logger logger = Logger.getLogger(getClass());
