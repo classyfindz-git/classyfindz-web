@@ -27,11 +27,11 @@
     	  // Selected tags badges
     	  $scope.addToTagList = function($item, $model, $label) {
     		$scope.tagsList.push($model);
-    		refreshAdvertsDatabase();
+    		$scope.refreshAdvertsDatabase();
     	  };
     	  $scope.removeFromTagList = function(index) {
     	      $scope.tagsList.splice(index, 1);
-      		  refreshAdvertsDatabase();
+    	      $scope.refreshAdvertsDatabase();
       	  };
     	  // End selected tags badges
 
@@ -111,6 +111,7 @@
 					get: get
 				};
 		  };
+		  $scope.refreshAdvertsDatabase();
     }
     SearchController.$inject = injectParams;
 
