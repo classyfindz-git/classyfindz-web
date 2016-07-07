@@ -21,13 +21,6 @@
     	      });
     	    });
     	  };
-    	  $scope.modelOptions = {
-    	    debounce: {
-    	      default: 500,
-    	      blur: 250
-    	    },
-    	    getterSetter: true
-    	  };
     	  // End Auto-complete behavior
 
     	  // Selected tags badges
@@ -62,7 +55,6 @@
       	  	       	    { title:'Alphabetical', size: 33  },
       	  	       	    { title:'Geographical', size: 33 }
       	  	       	  ];
-      	  $scope.advertList = ['Category A', 'Category B', 'Category C', 'Category D', 'Category E', 'Category F'];
       	  $scope.advertsDatabase = {
       			  	'Category A' : {
       			  		adverts : [
@@ -124,6 +116,9 @@
 		  $scope.bigTotalItems = 175;
 		  $scope.bigCurrentPage = 1;
 		  
+      	  $scope.getAdvertsDatabaseCategoryList = function() {
+      		  return Object.keys($scope.advertsDatabase);
+      	  };
 		  $scope.adapterService = function(category) {
 			  var adapter = 'adapter-' + md5.createHash(category);
 			  $scope[adapter] = {
@@ -131,7 +126,6 @@
 			  };
 			  return adapter;
 		  };
-
 		  $scope.advertListDatasourceService = function(category) {
 			  var get = function (index, count, success) {
 					$timeout(function () {

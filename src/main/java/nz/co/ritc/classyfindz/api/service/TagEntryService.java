@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,7 @@ import nz.co.ritc.classyfindz.jpa.repository.TagsRepository;
  */
 @Component
 @RestController
+@CrossOrigin(origins="http://localhost:8080")
 public class TagEntryService {
 
 	Logger logger = Logger.getLogger(getClass());

@@ -39,6 +39,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -48,6 +49,7 @@ import org.springframework.web.util.WebUtils;
 @ComponentScan
 @EnableAutoConfiguration
 @RestController
+@CrossOrigin(origins="http://localhost:8080")
 @EnableJpaRepositories
 @EnableTransactionManagement
 public class UiApplication extends SpringBootServletInitializer {
@@ -129,7 +131,6 @@ public class UiApplication extends SpringBootServletInitializer {
 					.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class).logout().deleteCookies("remove")
 					.invalidateHttpSession(true).logoutUrl("/logout").logoutSuccessUrl("/");
 		}
-
 		private Filter csrfHeaderFilter() {
 			return new OncePerRequestFilter() {
 				@Override
