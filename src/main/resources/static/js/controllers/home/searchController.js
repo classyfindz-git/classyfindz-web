@@ -74,6 +74,7 @@
     	    	$scope.advertsDatabase = response.data;
     	    });
     	  };
+    	  $scope.refreshAdvertsDatabase();
       	  $scope.getAdvertsDatabaseCategoryList = function() {
       		  return Object.keys($scope.advertsDatabase);
       	  };
@@ -111,7 +112,6 @@
 					get: get
 				};
 		  };
-		  $scope.refreshAdvertsDatabase();
     }
     SearchController.$inject = injectParams;
 

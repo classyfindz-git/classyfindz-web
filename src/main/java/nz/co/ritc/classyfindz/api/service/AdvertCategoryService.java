@@ -1,7 +1,6 @@
 package nz.co.ritc.classyfindz.api.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class AdvertCategoryService {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/public/services/adverts")
-	public ResponseEntity getAdvertsListDatabase(@RequestParam List<String> tags) {
+	public ResponseEntity getAdvertsListDatabase(@RequestParam(required=false) List<String> tags) {
 		final Map<String, AdvertCategoryView> categories = new HashMap<>();
 		int i = 0;	
 		double random = Math.random();
