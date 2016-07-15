@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework: DEBUG
     nz.co.ritc.classyfindz: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql: DEBUG
@@ -8,9 +8,9 @@ logging:
 #JDBC
 jdbc:
   driverClassName: 'com.mysql.jdbc.Driver'
-  username: m1cwdev1
-  password: nnzj58TYM
-  url: 'jdbc:mysql://db-1cw-dev-1.cq2j9lvsqvyg.us-west-2.rds.amazonaws.com:3306/db_1cw_dev_1'
+  username: root
+  password: password
+  url: 'jdbc:mysql://localhost:3306/db_1cw_local'
   
 #Hibernate Configuration
 hibernate:
@@ -20,4 +20,8 @@ hibernate:
   ejb:
     naming_strategy: 'org.hibernate.cfg.ImprovedNamingStrategy'
   show_sql: true
-  format_sql: true    
+  format_sql: true
+
+server:
+  port:9999
+    

@@ -41,3 +41,16 @@ VALUES (1,'ROLE_USER');
 
 INSERT INTO group_members (id, username, group_id)
 VALUES (1, 'test@email.com', 1);
+
+CREATE TABLE `tags` (
+  `tag_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_name` varchar(200) NOT NULL,
+  `md5_checksum` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`tag_id`),
+  KEY `indx_tag_name` (`tag_name`),
+  KEY `indx_md5` (`md5_checksum`)
+);
+CREATE TABLE `advert` (
+  `advert_id` int(11) NOT NULL,
+  PRIMARY KEY (`advert_id`)
+);
