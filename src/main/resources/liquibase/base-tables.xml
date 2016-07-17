@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="1" author="none">
+		<createTable tableName="users">
+			<column name="users_id" type="int" autoIncrement="true" >
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="PASSWORD" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="enabled" type="boolean" defaultValueBoolean="true" />
+		</createTable>
+		<createTable tableName="authorities">
+			<column name="authorities_id" type="int" autoIncrement="true" >
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="authority" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="groups">
+			<column name="groups_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="group_name" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="account">
+			<column name="account_id" type="int" autoIncrement="true"  >
+				<constraints primaryKey="true"/>
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="2" author="none">
+		<createTable tableName="account_users">
+			<column name="account_users_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="account_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_account_users_account" referencedTableName="account" referencedColumnNames="account_id" />
+			</column>
+		</createTable>
+		<createTable tableName="group_members">
+			<column name="group_members_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_group_members_groups" referencedTableName="groups" referencedColumnNames="groups_id" />
+			</column>
+		</createTable>
+		<createTable tableName="group_authorities">
+			<column name="group_authorities_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="group_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_group_authorities_groups" referencedTableName="groups" referencedColumnNames="groups_id" />
+			</column>
+			<column name="group_name" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="3" author="none">
+		<createTable tableName="advert">
+			<column name="advert_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="account_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_advert_account" referencedTableName="account" referencedColumnNames="account_id" />
+			</column>
+		</createTable>
+		<createTable tableName="tags">
+			<column name="tags_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="tag_name" type="varchar(50)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="md5_checksum" type="varchar(50)" />
+		</createTable>
+		<createTable tableName="listing_category">
+			<column name="listing_category_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="category_name" type="varchar(75)">
+				<constraints unique="true" nullable="false" />
+			</column>
+			<column name="category_description" type="varchar(275)" />
+		</createTable>
+	</changeSet>
+	<changeSet id="4" author="none">
+		<createTable tableName="spend_limits">
+			<column name="spend_limit_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="advert_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_spend_limits_advert" referencedTableName="advert" referencedColumnNames="advert_id" />
+			</column>
+			<column name="account_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_spend_limits_account" referencedTableName="account" referencedColumnNames="account_id" />
+			</column>
+			<column name="type" type="varchar(3)"  />
+			<column name="value" type="decimal" defaultValue="0"></column>
+		</createTable>
+		<createTable tableName="advert_registry">
+			<column name="advert_registry_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="advert_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_advert_registry_advert" referencedTableName="advert" referencedColumnNames="advert_id" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="5" author="none">
+		<createTable tableName="advert_has_tags">
+			<column name="advert_has_tags_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="advert_id" type="int" />
+			<column name="tags_id" type="int" />
+		</createTable>
+		<createTable tableName="adv_reg_has_lis_cat">
+			<column name="adv_reg_has_lis_cat_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="advert_registry_id" type="int" />
+			<column name="listing_category_id" type="int" />
+		</createTable>
+	</changeSet>
+
+	<changeSet id="6" author="none" >
+		<createSequence sequenceName="seq_users" />
+		<createSequence sequenceName="seq_authorities" />
+		<createSequence sequenceName="seq_account" />
+		<createSequence sequenceName="seq_account_users" />
+		<createSequence sequenceName="seq_groups" />
+		<createSequence sequenceName="seq_group_members" />
+		<createSequence sequenceName="seq_group_authorities" />
+		<createSequence sequenceName="seq_advert" />
+		<createSequence sequenceName="seq_spend_limits" />
+		<createSequence sequenceName="seq_tags" />
+		<createSequence sequenceName="seq_advert_registry" />
+		<createSequence sequenceName="seq_adv_reg_has_lis_cat" />
+	</changeSet>
+	<changeSet author="none" id="7">
+	    <createView 
+	            replaceIfExists="true"
+	            viewName="v_default_advert_scores">select  rownum rank, ar.*, s.value from advert_registry ar
+	join advert a on a.advert_id = ar.advert_id
+	left join spend_limits s on s.advert_id = a.advert_id 
+	order by s.value desc</createView>
+	</changeSet>
+</databaseChangeLog>

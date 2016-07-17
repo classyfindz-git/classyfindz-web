@@ -2,9 +2,6 @@ package nz.co.ritc.classyfindz;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.Filter;

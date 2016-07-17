@@ -25,6 +25,16 @@ public class AdvertCategoryService {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/public/services/adverts")
 	public ResponseEntity getAdvertsListDatabase(@RequestParam(required=false) List<String> tags) {
+		final Map<String, AdvertCategoryView> categories = dummyMethod();
+
+		return new ResponseEntity(categories, HttpStatus.OK) ;
+	}
+
+	private Map<String, AdvertCategoryView> realMethod() {
+		return null;
+	}
+	
+	private Map<String, AdvertCategoryView> dummyMethod() {
 		final Map<String, AdvertCategoryView> categories = new HashMap<>();
 		int i = 0;	
 		double random = Math.random();
@@ -35,8 +45,7 @@ public class AdvertCategoryService {
 			if (random < 0.1)
 				random *= 10;
 		}
-
-		return new ResponseEntity(categories, HttpStatus.OK) ;
+		return categories;
 	}
 
 	private AdvertCategoryView getAdvertsForCategory() {

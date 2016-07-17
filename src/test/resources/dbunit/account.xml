@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+     <users users_id="1" username="test@email.com" password="179AD45C6CE2CB97CF1029E212046E81" enabled="1"/> 
+     <account account_id="1" /> 
+     <account_users account_users_id="1" account_id="1" username="test@email.com" /> 
+</dataset>

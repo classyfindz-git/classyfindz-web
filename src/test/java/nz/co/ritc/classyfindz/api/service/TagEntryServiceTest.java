@@ -9,8 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 import nz.co.ritc.classyfindz.ApplicationTests;
 import nz.co.ritc.classyfindz.api.resource.TagEntry;
@@ -25,8 +26,8 @@ public class TagEntryServiceTest extends ApplicationTests {
 	TagEntryService service;
 	
 	@Test
-	@DatabaseSetup(value = "/dbunit/tags.xml")
-	//@ExpectedDatabase("tags.xml")
+	@DatabaseSetup(value = "/dbunit/tags.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/tags.xml", type= DatabaseOperation.DELETE)
 	public void test() {
 		final List<TagEntry> tags = service.getSearchTagStartingWith("test");
 		Assert.assertNotNull(tags);

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="none" id="7">
+	    <dropView 
+	            viewName="v_default_advert_scores"/>
+	</changeSet>
+	<changeSet id="6" author="none" >
+		<dropSequence sequenceName="seq_users" />
+		<dropSequence sequenceName="seq_authorities" />
+		<dropSequence sequenceName="seq_account" />
+		<dropSequence sequenceName="seq_account_users" />
+		<dropSequence sequenceName="seq_groups" />
+		<dropSequence sequenceName="seq_group_members" />
+		<dropSequence sequenceName="seq_group_authorities" />
+		<dropSequence sequenceName="seq_advert" />
+		<dropSequence sequenceName="seq_spend_limits" />
+		<dropSequence sequenceName="seq_tags" />
+		<dropSequence sequenceName="seq_advert_registry" />
+		<dropSequence sequenceName="seq_adv_reg_has_lis_cat" />
+	</changeSet>
+	<changeSet id="5" author="none">
+		<dropTable tableName="advert_has_tags"/>
+		<dropTable tableName="adv_reg_has_lis_cat" />
+	</changeSet>	
+	<changeSet id="4" author="none">
+		<dropTable tableName="spend_limits"/>
+		<dropTable tableName="advert_registry"/>
+	</changeSet>
+	<changeSet id="3" author="none">
+		<dropTable tableName="advert"/>
+		<dropTable tableName="tags"/>
+		<dropTable tableName="listing_category"/>
+	</changeSet>
+	<changeSet id="2" author="none">
+		<dropTable tableName="account_users"/>
+		<dropTable tableName="group_members"/>
+		<dropTable tableName="group_authorities"/>
+	</changeSet>
+	<changeSet id="1" author="none">
+		<dropTable tableName="users"/>
+		<dropTable tableName="authorities"/>
+		<dropTable tableName="groups"/>
+		<dropTable tableName="account"/>
+	</changeSet>
+
+</databaseChangeLog>
