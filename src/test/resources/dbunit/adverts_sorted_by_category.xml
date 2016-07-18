@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<account account_id="1" /> 
+	<advert advert_id="1" account_id="1"/>
+    <tags tags_id="1"  tag_name="test tag 1" md5_checksum="A80D4B58CEAC83A047FD6F73D5E9C3B3"/> 
+	<listing_category listing_category_id="1" category_name="category a" category_description="test category a"/>
+	<listing_category listing_category_id="2" category_name="category b" category_description="test category b"/>
+	<advert_has_tags advert_has_tags_id="1" advert_id="1" tags_id="1"/>
+	<advert_registry advert_registry_id="1" advert_id="1" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="1" advert_registry_id="1" listing_category_id="1" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="2" advert_registry_id="1" listing_category_id="2" />
+	<!-- column_advert_content column_advert_content_id="1" advert_id="1" heading="my test advert"  body="lets sell something here"/ -->
+
+
+	<advert advert_id="2" account_id="1"/>
+	<advert_has_tags advert_has_tags_id="2" advert_id="2" tags_id="1"/>
+	<advert_registry advert_registry_id="2" advert_id="2" />
+	<listing_category listing_category_id="3" category_name="category c" category_description="test category c"/>
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="3" advert_registry_id="2" listing_category_id="2" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="4" advert_registry_id="2" listing_category_id="3" />
+	<!-- column_advert_content column_advert_content_id="2" advert_id="2" heading="my second test advert"  body="lets sell something here for the same account"/ -->
+
+</dataset>

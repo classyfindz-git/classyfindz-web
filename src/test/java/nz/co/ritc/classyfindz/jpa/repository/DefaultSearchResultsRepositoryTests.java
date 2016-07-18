@@ -3,6 +3,11 @@
  */
 package nz.co.ritc.classyfindz.jpa.repository;
 
+import java.util.Collection;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.TransformerUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +36,30 @@ public class DefaultSearchResultsRepositoryTests extends ApplicationTests {
 		Assert.assertNotNull(resultsEntry);
 	}
 
+	@Test
+	@DatabaseSetup(value = "/dbunit/default_advert_scores.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/default_advert_scores.xml", type= DatabaseOperation.DELETE)
+	public void testFindAll() {
+		final Iterable<DefaultSearchResultsView> results = service.findAll();
+		Assert.assertNotNull(results);
+		Collection resultsCollection = CollectionUtils.collect(results.iterator(), TransformerUtils.nopTransformer());
+		Assert.assertEquals(2, resultsCollection.size());
+	}
+
+	@Test
+	@DatabaseSetup(value = "/dbunit/adverts_sorted_by_category.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/adverts_sorted_by_category.xml", type= DatabaseOperation.DELETE)
+	public void testSortedByCategory() {
+		final Iterable<DefaultSearchResultsView> results = service.findAll();
+		Assert.assertNotNull(results);
+		String[] categoryList = {"category a", "category b", "category b",  "category c"};
+		int i=0;
+		for (DefaultSearchResultsView defaultSearchResultsView : results) {
+			Assert.assertEquals(categoryList[i], defaultSearchResultsView.getListingCategory());
+			i++;
+		}
+		Assert.assertEquals(4, i);
+	}
+	
+	
 }

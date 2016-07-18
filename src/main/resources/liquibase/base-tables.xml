@@ -164,9 +164,12 @@
 	<changeSet author="none" id="7">
 	    <createView 
 	            replaceIfExists="true"
-	            viewName="v_default_advert_scores">select  rownum rank, ar.*, s.value from advert_registry ar
+	            viewName="v_default_advert_scores">select  rownum rank, arlc.*, s.value, lc.category_name from adv_reg_has_lis_cat arlc
+	join advert_registry ar on ar.advert_registry_id = arlc.advert_registry_id
+	join listing_category lc on arlc.listing_category_id = lc.listing_category_id 
 	join advert a on a.advert_id = ar.advert_id
-	left join spend_limits s on s.advert_id = a.advert_id 
-	order by s.value desc</createView>
+	left join spend_limits s on s.advert_id = a.advert_id
+	order by lc.category_name asc, s.value desc
+</createView>
 	</changeSet>
 </databaseChangeLog>

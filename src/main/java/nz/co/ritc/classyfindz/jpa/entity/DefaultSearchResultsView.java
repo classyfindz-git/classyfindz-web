@@ -27,6 +27,9 @@ public class DefaultSearchResultsView {
 	@JoinColumn(name="advert_registry_id", updatable=false, insertable=false)
 	private AdvertRegistry advertEntry;
 
+	@Column(name="category_name", insertable=false, updatable=false)
+	private String listingCategory;
+	
 	public long getRank() {
 		return rank;
 	}
@@ -41,6 +44,14 @@ public class DefaultSearchResultsView {
 
 	public void setAdvertEntry(AdvertRegistry advertEntry) {
 		this.advertEntry = advertEntry;
+	}
+
+	public String getListingCategory() {
+		return listingCategory;
+	}
+
+	public void setListingCategory(String listingCategory) {
+		this.listingCategory = listingCategory;
 	}
 
 }
