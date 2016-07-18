@@ -79,6 +79,7 @@
       		  return Object.keys($scope.advertsDatabase);
       	  };
 		  $scope.adapterService = function(category) {
+			  // Create unique adapter name
 			  var adapter = 'adapter-' + md5.createHash(category);
 			  $scope[adapter] = {
 				      remain: true					  

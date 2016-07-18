@@ -24,7 +24,9 @@ hibernate:
   validator:
     apply_to_ddl: false
 
+server:
+  port:9999
+
 local:
   server:
     port:9999
-    
