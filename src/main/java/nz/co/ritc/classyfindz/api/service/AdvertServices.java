@@ -94,7 +94,7 @@ public class AdvertServices {
 		// List categories having adverts with matching tags, order by descending count of adverts
 		final PageRequest pageRequest = new PageRequest(page, CATEGORY_VIEW_PAGE_SIZE, _sort);
 		final Page<CategoryPageView> categoriesOnPage = categoryPageViewRepository.findByTagNameIn(tags, pageRequest);
-		for (CategoryPageView categoryPageView : categoriesOnPage) {
+		for (final CategoryPageView categoryPageView : categoriesOnPage) {
 			// Load first 5 Column Adverts for categories for selected tags
 			categories.put(
 					categoryPageView.getListingCategory(), 
@@ -103,7 +103,7 @@ public class AdvertServices {
 					categoryPageView.getListingCategory(), 
 					tags, 
 					_colAdvFirstPage);
-			for (nz.co.ritc.classyfindz.jpa.entity.ColumnAdvert columnAdvert : resultView) {
+			for (final nz.co.ritc.classyfindz.jpa.entity.ColumnAdvert columnAdvert : resultView) {
 				final List<ColumnAdvert> adverts = categories.get(categoryPageView.getListingCategory()).getAdverts();
 				if (!CollectionUtils.exists(adverts, new Predicate() {
 					
