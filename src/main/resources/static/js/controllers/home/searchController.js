@@ -60,7 +60,7 @@
       	  	       	  ];
       	  
       	  $scope.totalItems = 64;
-      	  $scope.currentPage = 4;
+      	  $scope.currentPage = 1;
 		  $scope.maxSize = 5;
 		  $scope.bigTotalItems = 175;
 		  $scope.bigCurrentPage = 1;
@@ -69,7 +69,7 @@
     		  return $http.get('//1columnwide.net.nz/public/services/adverts', {
     	      params: {
     	        tags : $scope.tagsList,
-    	        page: $scope.currentPage
+    	        page: $scope.currentPage - 1
     	      }
     	    }).then(function(response){
     	    	$scope.advertsDatabase = response.data;
