@@ -2,18 +2,18 @@
 <dataset>
 	<account account_id="20000" /> 
 	<advert advert_id="10000" account_id="20000"/>
-	<column_advert column_advert_id="10000" advert_id="10000" heading="my test advert"  body="lets sell something here"/>
     <tags tags_id="10000"  tag_name="test tag 1" md5_checksum="A80D4B58CEAC83A047FD6F73D5E9C3B3"/> 
 	<listing_category listing_category_id="10000" category_name="category a" category_description="test category a"/>
 	<advert_has_tags advert_has_tags_id="10000" advert_id="10000" tags_id="10000"/>
 	<advert_registry advert_registry_id="10000" advert_id="10000" />
 	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10000" advert_registry_id="10000" listing_category_id="10000" />
+	<column_advert column_advert_id="10000" advert_id="10000" heading="my test advert"  body="lets sell something here"/>
 
 
 	<advert advert_id="20000" account_id="20000"/>
-	<column_advert column_advert_id="20000" advert_id="20000" heading="my second test advert"  body="lets sell something else here"/>
 	<advert_has_tags advert_has_tags_id="20000" advert_id="20000" tags_id="10000"/>
 	<advert_registry advert_registry_id="20000" advert_id="20000" />
 	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="20000" advert_registry_id="20000" listing_category_id="10000" />
+	<column_advert column_advert_id="10000" advert_id="10000" heading="another test advert"  body="lets sell something else here"/>
 
 </dataset>

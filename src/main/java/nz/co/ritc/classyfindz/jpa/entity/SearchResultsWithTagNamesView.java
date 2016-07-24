@@ -3,11 +3,15 @@
  */
 package nz.co.ritc.classyfindz.jpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,8 +20,8 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="v_default_advert_scores")
-public class DefaultSearchResultsView {
+@Table(name="v_advert_scores_with_tags")
+public class SearchResultsWithTagNamesView {
 
 	@Id
 	@Column(name="rank", insertable=false, updatable=false)
@@ -33,7 +37,11 @@ public class DefaultSearchResultsView {
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="column_advert_id", updatable=false, insertable=false)
 	private ColumnAdvert columnAdvert;
-	
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="tags_id", updatable=false, insertable=false)
+	private Tags tags;	
+
 	public long getRank() {
 		return rank;
 	}
@@ -65,5 +73,14 @@ public class DefaultSearchResultsView {
 	public void setColumnAdvert(ColumnAdvert columnAdvert) {
 		this.columnAdvert = columnAdvert;
 	}
+
+	public Tags getTags() {
+		return tags;
+	}
+
+	public void setTags(Tags tags) {
+		this.tags = tags;
+	}
+
 
 }

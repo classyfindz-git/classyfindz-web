@@ -35,7 +35,7 @@ public class AdvertRegistry {
     @JoinColumn(name = "advert_id")
     private Advert advert;
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable
     (
         name="adv_reg_has_lis_cat",

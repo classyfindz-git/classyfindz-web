@@ -49,7 +49,7 @@
   			  $scope.currentPage = pageNo;
 		  };
 		  $scope.pageChanged = function() {
-			  //$log.log('Page changed to: ' + $scope.currentPage);
+	    	  $scope.refreshAdvertsDatabase();
 		  };
 		  // End category columns pagination
 
@@ -68,7 +68,8 @@
     	  $scope.refreshAdvertsDatabase = function() {
     		  return $http.get('//1columnwide.net.nz/public/services/adverts', {
     	      params: {
-    	        tags : $scope.tagsList
+    	        tags : $scope.tagsList,
+    	        page: $scope.currentPage
     	      }
     	    }).then(function(response){
     	    	$scope.advertsDatabase = response.data;

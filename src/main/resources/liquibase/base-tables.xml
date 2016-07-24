@@ -172,4 +172,56 @@
 	order by lc.category_name asc, s.value desc
 </createView>
 	</changeSet>
+	<changeSet author="none" id="8">
+		<createView viewName="v_category_pages">select  count(*) count, lc.category_name, t.tag_name 
+	from adv_reg_has_lis_cat arlc
+	join listing_category lc on arlc.listing_category_id = lc.listing_category_id 
+	join advert_registry ar on ar.advert_registry_id = arlc.advert_registry_id
+	left join advert_has_tags at on at.advert_id = ar.advert_id
+	left join tags t on  t.tags_id = at.tags_id
+	group by lc.category_name, t.tag_name
+	order by count desc, category_name asc</createView>
+	</changeSet>
+	<changeSet id="9" author="none">
+		<createTable tableName="column_advert">
+			<column name="column_advert_id"  type="int" autoIncrement="true">
+				<constraints primaryKey="true"/>
+			</column>
+			<column name="advert_id" type="int">
+				<constraints nullable="false" foreignKeyName="fk_column_advert_advert" referencedTableName="advert" referencedColumnNames="advert_id" />
+			</column>
+			<column name="heading" type="varchar(75)"  />
+			<column name="body" type="varchar(300)"  />
+		</createTable>
+		<createSequence sequenceName="seq_column_advert" />
+	</changeSet>
+	<changeSet author="none" id="10">
+	    <createView 
+	            replaceIfExists="true"
+	            viewName="v_default_advert_scores">select  rownum rank, arlc.*, s.value, lc.category_name, c.column_advert_id 
+	from adv_reg_has_lis_cat arlc
+	join advert_registry ar on ar.advert_registry_id = arlc.advert_registry_id
+	join listing_category lc on arlc.listing_category_id = lc.listing_category_id 
+	join advert a on a.advert_id = ar.advert_id
+	join column_advert c on c.advert_id = a.advert_id
+	left join spend_limits s on s.advert_id = a.advert_id
+	order by lc.category_name asc, s.value desc
+</createView>
+	</changeSet>
+	<changeSet author="none" id="11">
+	    <createView 
+	            replaceIfExists="true"
+	            viewName="v_advert_scores_with_tags">select  rownum rank, arlc.*, s.value, lc.category_name, c.column_advert_id, t.tags_id  
+	from adv_reg_has_lis_cat arlc
+	join advert_registry ar on ar.advert_registry_id = arlc.advert_registry_id
+	join listing_category lc on arlc.listing_category_id = lc.listing_category_id 
+	join advert a on a.advert_id = ar.advert_id
+	join column_advert c on c.advert_id = a.advert_id
+	left join spend_limits s on s.advert_id = a.advert_id
+	left join advert_has_tags at on at.advert_id = a.advert_id
+	left join tags t on  t.tags_id = at.tags_id
+	order by s.value desc
+</createView>
+	</changeSet>
+
 </databaseChangeLog>

@@ -6,6 +6,18 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+	<changeSet id="10" author="none">
+	    <dropView 
+	            viewName="v_advert_scores_with_tags"/>
+	</changeSet>	
+	<changeSet id="9" author="none">
+		<dropSequence sequenceName="seq_column_advert" />
+		<dropTable tableName="column_advert" />
+	</changeSet>	
+	<changeSet author="none" id="8">
+	    <dropView 
+	            viewName="v_category_pages"/>
+	</changeSet>
 	<changeSet author="none" id="7">
 	    <dropView 
 	            viewName="v_default_advert_scores"/>

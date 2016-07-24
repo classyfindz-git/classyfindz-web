@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<account account_id="10001" /> 
+	<advert advert_id="10001" account_id="10001"/>
+	<column_advert column_advert_id="10001" advert_id="10001" heading="my test advert"  body="lets sell something here"/>
+    <tags tags_id="10001"  tag_name="test tag 1" md5_checksum="A80D4B58CEAC83A047FD6F73D5E9C3B3"/> 
+	<listing_category listing_category_id="10001" category_name="category a" category_description="test category a"/>
+	<listing_category listing_category_id="10002" category_name="category b" category_description="test category b"/>
+	<advert_has_tags advert_has_tags_id="10001" advert_id="10001" tags_id="10001"/>
+	<advert_registry advert_registry_id="10001" advert_id="10001" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10001" advert_registry_id="10001" listing_category_id="10001" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10002" advert_registry_id="10001" listing_category_id="10002" />
+
+	<advert advert_id="10002" account_id="10001"/>
+	<column_advert column_advert_id="10002" advert_id="10002" heading="my second test advert"  body="lets sell something here"/>
+	<advert_has_tags advert_has_tags_id="10002" advert_id="10002" tags_id="10001"/>
+	<advert_registry advert_registry_id="10002" advert_id="10002" />
+	<listing_category listing_category_id="10003" category_name="category c" category_description="test category c"/>
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10003" advert_registry_id="10002" listing_category_id="10002" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10004" advert_registry_id="10002" listing_category_id="10003" />
+
+	<account account_id="10002" /> 
+	<advert advert_id="10003" account_id="10002"/>
+	<column_advert column_advert_id="10003" advert_id="10003" heading="my third test advert"  body="lets sell something here"/>
+	<listing_category listing_category_id="10004" category_name="category d" category_description="test category d"/>
+	<listing_category listing_category_id="10005" category_name="category e" category_description="test category e"/>
+	<advert_has_tags advert_has_tags_id="10003" advert_id="10003" tags_id="10001"/>
+	<advert_registry advert_registry_id="10003" advert_id="10003" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10005" advert_registry_id="10003" listing_category_id="10004" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10006" advert_registry_id="10003" listing_category_id="10005" />
+
+	<advert advert_id="10004" account_id="10002"/>
+	<column_advert column_advert_id="10004" advert_id="10004" heading="my fourth test advert"  body="lets sell something here"/>
+    <tags tags_id="10002"  tag_name="test tag 2" md5_checksum="A80D4B58CEAC83A047FD6F73D5E9C3B3"/> 
+	<listing_category listing_category_id="10006" category_name="category f" category_description="test category f"/>
+	<advert_has_tags advert_has_tags_id="10004" advert_id="10004" tags_id="10002"/>
+	<advert_registry advert_registry_id="10004" advert_id="10004" />
+	<adv_reg_has_lis_cat adv_reg_has_lis_cat_id="10007" advert_registry_id="10004" listing_category_id="10006" />
+
+
+</dataset>

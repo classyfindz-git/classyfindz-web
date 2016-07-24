@@ -4,6 +4,7 @@
 package nz.co.ritc.classyfindz.jpa.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
@@ -11,6 +12,8 @@ import org.apache.commons.collections.TransformerUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -61,5 +64,13 @@ public class DefaultSearchResultsRepositoryTests extends ApplicationTests {
 		Assert.assertEquals(4, i);
 	}
 	
+	@Test
+	@DatabaseSetup(value = "/dbunit/default_adverts_find_by_category.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/default_adverts_find_by_category.xml", type= DatabaseOperation.DELETE)
+	public void testFindByCategory() {
+		final Page<DefaultSearchResultsView> resultsEntry = service.findByListingCategory("category b", new PageRequest(0, 5));
+		Assert.assertNotNull(resultsEntry);
+		Assert.assertEquals(3, resultsEntry.getNumberOfElements());
+	}
 	
 }
