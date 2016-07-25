@@ -59,20 +59,20 @@
       	  	       	    { title:'Geographical', size: 33 }
       	  	       	  ];
       	  
-      	  $scope.totalItems = 64;
-      	  $scope.currentPage = 1;
+      	  $scope.bigCurrentPage = 1;
 		  $scope.maxSize = 5;
-		  $scope.bigTotalItems = 175;
-		  $scope.bigCurrentPage = 1;
-		  
+
     	  $scope.refreshAdvertsDatabase = function() {
     		  return $http.get('//1columnwide.net.nz/public/services/adverts', {
     	      params: {
-    	        tags : $scope.tagsList,
-    	        page: $scope.currentPage - 1
+    	        tags : 		$scope.tagsList,
+    	        page: 		$scope.bigCurrentPage - 1,
+    	        pageSize: 	$scope.maxSize
     	      }
     	    }).then(function(response){
-    	    	$scope.advertsDatabase = response.data;
+    	    	$scope.advertsDatabase = response.data.categoryView;
+				$scope.bigTotalItems = response.data.pageItems;
+				$scope.showPagination = response.data.pageItems > $scope.maxSize;
     	    });
     	  };
     	  $scope.refreshAdvertsDatabase();

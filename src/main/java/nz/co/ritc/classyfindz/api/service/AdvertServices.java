@@ -38,17 +38,15 @@ import nz.co.ritc.classyfindz.jpa.repository.SearchResultsWithTagNamesViewReposi
 @CrossOrigin(origins="*")
 public class AdvertServices {
 
-	private static final int COL_ADV_SCROSS_PAGE_SIZE = 5;
+	private static final int COL_ADV_SCROLL_PAGE_SIZE = 5;
 
 	private static final int COL_ADV_SCROLL_START_IDX = 0;
-
-	private static final int CATEGORY_VIEW_PAGE_SIZE = 6;
 
 	final Sort _sort = new Sort(
 		    new Order(Direction.DESC, "count"), 
 		    new Order(Direction.ASC, "listingCategory")
 		  );
-	final PageRequest _colAdvFirstPage = new PageRequest(COL_ADV_SCROLL_START_IDX, COL_ADV_SCROSS_PAGE_SIZE, new Sort(
+	final PageRequest _colAdvFirstPage = new PageRequest(COL_ADV_SCROLL_START_IDX, COL_ADV_SCROLL_PAGE_SIZE, new Sort(
 		    new Order(Direction.ASC, "rank")
 		  ));
 
@@ -66,34 +64,57 @@ public class AdvertServices {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/public/services/adverts")
-	public ResponseEntity getAdvertsListDatabase(@RequestParam(required=false) List<String> tags, @RequestParam(required=true) int page) {
-		final Map<String, AdvertCategoryView> categories = 
-				CollectionUtils.isEmpty(tags) ? loadDefaultAdverts(page) : loadAdvertsForSelectedTags(tags, page);
-		return new ResponseEntity(categories, HttpStatus.OK) ;
+	protected ResponseEntity getAdvertsListDatabase(@RequestParam(required=false) List<String> tags, @RequestParam(required=true) int page, @RequestParam(required=true) int pageSize) {
+		final AdvertsListPage pageView = 
+				CollectionUtils.isEmpty(tags) ? loadDefaultAdverts(page, pageSize) : loadAdvertsForSelectedTags(tags, page, pageSize);
+		return new ResponseEntity(pageView, HttpStatus.OK) ;
 	}
 
-	private Map<String, AdvertCategoryView> loadDefaultAdverts(int page) {
+	private AdvertsListPage loadDefaultAdverts(int page, int pageSize) {
+		final AdvertsListPage pageView = new AdvertsListPage();
 		final Map<String, AdvertCategoryView> categories = new HashMap<>();
+		final Map<String, Long> categoryCounts = new HashMap<>();
+
 		// List categories having adverts with matching tags, order by descending count of adverts
-		final PageRequest pageRequest = new PageRequest(page, CATEGORY_VIEW_PAGE_SIZE, _sort);
-		final Page<CategoryPageView> categoriesOnPage = categoryPageViewRepository.findAll(pageRequest) ;
-		for (CategoryPageView categoryPageView : categoriesOnPage) {
+		final Page<CategoryPageView> selectedCategories = categoryPageViewRepository.findAll(new PageRequest(page, pageSize, _sort)) ;
+		pageView.setCategoryView(categories);
+		pageView.setCategoryCount(categoryCounts);
+		pageView.setPageItems(categoryPageViewRepository.findCategoryNames().size());
+
+		for (CategoryPageView categoryPageView : selectedCategories) {
 			// Load first 5 Column Adverts for categories
-			categories.put(categoryPageView.getListingCategory(), new AdvertCategoryView(new ArrayList<ColumnAdvert>()));
-			final Page<DefaultSearchResultsView> resultView = defaultSearchResultsViewRepository.findByListingCategory(categoryPageView.getListingCategory(), _colAdvFirstPage);
+			final String category = categoryPageView.getListingCategory();
+			categories.put(category, new AdvertCategoryView(new ArrayList<ColumnAdvert>()));
+			final Page<DefaultSearchResultsView> resultView = defaultSearchResultsViewRepository.findByListingCategory(category, _colAdvFirstPage);
 			for (final DefaultSearchResultsView defaultSearchResultsView : resultView) {
 				final ColumnAdvert columnAdvert = new ColumnAdvert(defaultSearchResultsView.getColumnAdvert().getHeading(), defaultSearchResultsView.getColumnAdvert().getBody());
-				categories.get(categoryPageView.getListingCategory()).getAdverts().add(columnAdvert);
+				categories.get(category).getAdverts().add(columnAdvert);
 			}
+
+			// Add count of adverts for each category
+			if (categoryCounts.containsKey(category))
+				categoryCounts.put(category, categoryCounts.get(category) + categoryPageView.getCount());
+			else
+				categoryCounts.put(category, categoryPageView.getCount());
+
+			// Add category display 
+			if (!pageView.getCategoryDisplayOrder().contains(category))
+				pageView.getCategoryDisplayOrder().add(category);
 		}
-		return categories;
+
+		return pageView;
 	}
 	
-	private Map<String, AdvertCategoryView> loadAdvertsForSelectedTags(List<String> tags, int page) {
+	private AdvertsListPage loadAdvertsForSelectedTags(List<String> tags, int page, int pageSize) {
+		final AdvertsListPage pageView = new AdvertsListPage();
 		final Map<String, AdvertCategoryView> categories = new HashMap<>();
-		// List categories having adverts with matching tags, order by descending count of adverts
-		final PageRequest pageRequest = new PageRequest(page, CATEGORY_VIEW_PAGE_SIZE, _sort);
-		final Page<CategoryPageView> categoriesOnPage = categoryPageViewRepository.findByTagNameIn(tags, pageRequest);
+		final Map<String, Long> categoryCounts = new HashMap<>();
+
+		final Page<CategoryPageView> categoriesOnPage = categoryPageViewRepository.findByTagNameIn(tags, new PageRequest(page, pageSize, _sort));
+		pageView.setCategoryView(categories);
+		pageView.setCategoryCount(categoryCounts);
+		pageView.setPageItems(categoryPageViewRepository.findCategoryNamesByTagNameIn(tags).size());
+
 		for (final CategoryPageView categoryPageView : categoriesOnPage) {
 			// Load first 5 Column Adverts for categories for selected tags
 			categories.put(
@@ -115,7 +136,51 @@ public class AdvertServices {
 				}))
 					adverts.add(new ColumnAdvert(columnAdvert.getHeading(), columnAdvert.getBody()));
 			}
+
+			// Add count of adverts for each category
+			categoryCounts.put(categoryPageView.getListingCategory(), categoryPageView.getCount());
+			// Add category display 
+			pageView.getCategoryDisplayOrder().add(categoryPageView.getListingCategory());
 		}
-		return categories;
+		return pageView;
+	}
+	
+	public static class AdvertsListPage {
+		private Map<String, AdvertCategoryView> categoryView;
+		
+		private Map<String, Long> categoryCount;
+		
+		private long  pageItems;
+
+		private final List<String> categoryDisplayOrder = new ArrayList<>();
+
+		public Map<String, AdvertCategoryView> getCategoryView() {
+			return categoryView;
+		}
+
+		public void setCategoryView(Map<String, AdvertCategoryView> categoryView) {
+			this.categoryView = categoryView;
+		}
+
+		public Map<String, Long> getCategoryCount() {
+			return categoryCount;
+		}
+
+		public void setCategoryCount(Map<String, Long> categoryCount) {
+			this.categoryCount = categoryCount;
+		}
+
+		public long getPageItems() {
+			return pageItems;
+		}
+
+		public void setPageItems(long totalItems) {
+			this.pageItems = totalItems;
+		}
+
+		public List<String> getCategoryDisplayOrder() {
+			return categoryDisplayOrder;
+		}
+
 	}
 }

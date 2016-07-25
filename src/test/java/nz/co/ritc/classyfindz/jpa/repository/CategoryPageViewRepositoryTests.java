@@ -6,6 +6,7 @@ package nz.co.ritc.classyfindz.jpa.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,4 +93,41 @@ public class CategoryPageViewRepositoryTests extends ApplicationTests {
 		Assert.assertEquals(1, list.get(2).getCount());
 	}
 
+	@Test
+	@DatabaseSetup(value = "/dbunit/category_page_view.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/category_page_view.xml", type= DatabaseOperation.DELETE)
+	public void testSelectCategoryNamesByTags() {
+		List<String> list = repository.findCategoryNamesByTagNameIn(Arrays.asList("test tag 1", "test tag 2"));
+		Assert.assertNotNull(list);
+		Assert.assertTrue(CollectionUtils.isEqualCollection(Arrays.asList("category b","category c", "category e", "category a", "category d"), list));
+	}
+
+	@Test
+	@DatabaseSetup(value = "/dbunit/category_page_view.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/category_page_view.xml", type= DatabaseOperation.DELETE)
+	public void testSelectCategoryNames() {
+		List<String> list = repository.findCategoryNames();
+		Assert.assertNotNull(list);
+		Assert.assertTrue(CollectionUtils.isEqualCollection(Arrays.asList("category b", "category g", "category c", "category e", "category a", "category d", "category f"), list));
+	}
+
+	@Test
+	@DatabaseSetup(value = "/dbunit/category_page_view.xml", type=DatabaseOperation.REFRESH)
+	@DatabaseTearDown(value = "/dbunit/category_page_view.xml", type= DatabaseOperation.DELETE)
+	public void testSelect() {
+		Page<CategoryPageView> page = repository.findGroupedByCategoryName(new PageRequest(0, 3));
+		Assert.assertNotNull(page);
+		Assert.assertEquals(0, page.getNumber()); // Page number
+		Assert.assertEquals(3, page.getSize()); // Number of elements in current page
+		Assert.assertEquals(7, page.getTotalElements()); // Total number of elements
+		Assert.assertEquals(3, page.getTotalPages()); // Total number of pages
+		List<CategoryPageView> list = page.getContent();
+		Assert.assertEquals("category b", list.get(0).getListingCategory());
+		Assert.assertEquals(3, list.get(0).getCount());
+		Assert.assertEquals("category c", list.get(1).getListingCategory());
+		Assert.assertEquals(2, list.get(1).getCount());
+		Assert.assertEquals("category d", list.get(2).getListingCategory());
+		Assert.assertEquals(2, list.get(2).getCount());
+	}
+	
 }
