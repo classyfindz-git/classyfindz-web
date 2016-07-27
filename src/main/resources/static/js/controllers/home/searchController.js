@@ -46,7 +46,7 @@
 		  }
 		  // Category columns pagination
   		  $scope.setPage = function (pageNo) {
-  			  $scope.currentPage = pageNo;
+  			  $scope.bigCurrentPage = pageNo;
 		  };
 		  $scope.pageChanged = function() {
 	    	  $scope.refreshAdvertsDatabase();

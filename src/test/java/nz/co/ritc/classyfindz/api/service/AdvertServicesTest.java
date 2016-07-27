@@ -45,16 +45,17 @@ public class AdvertServicesTest extends ApplicationTests {
 		Assert.assertEquals(10, pageView.getPageItems());
 		final Map<String, Long> categoryCount = pageView.getCategoryCount();
 		Assert.assertEquals(1,(long)categoryCount.get("category a"));
-		Assert.assertEquals(4,(long)categoryCount.get("category b"));
-		Assert.assertEquals(1,(long)categoryCount.get("category c"));
+		Assert.assertEquals(3,(long)categoryCount.get("category b"));
+		Assert.assertEquals(2,(long)categoryCount.get("category c"));
 		Assert.assertEquals(2,(long)categoryCount.get("category d"));
-		Assert.assertTrue(CollectionUtils.isEqualCollection(Arrays.asList("category b", "category d", "category a", "category c"), pageView.getCategoryDisplayOrder()));
+		Assert.assertTrue(CollectionUtils.isEqualCollection(Arrays.asList("category b", "category c", "category d", "category f", "category a"), pageView.getCategoryDisplayOrder()));
 		final Map<String, AdvertCategoryView> body = pageView.getCategoryView();
-		Assert.assertEquals(4, body.size());
+		Assert.assertEquals(5, body.size());
 		Assert.assertTrue(body.containsKey("category a"));
 		Assert.assertTrue(body.containsKey("category b"));
 		Assert.assertTrue(body.containsKey("category c"));
 		Assert.assertTrue(body.containsKey("category d"));
+		Assert.assertTrue(body.containsKey("category f"));
 		Assert.assertEquals(1, body.get("category a").getAdverts().size());
 		Assert.assertEquals("my test advert", body.get("category a").getAdverts().get(0).getHeading());
 	}
