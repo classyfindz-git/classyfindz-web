@@ -9,6 +9,9 @@
     	  
     	  $scope.selected = undefined;
       	  $scope.advertsDatabase = {};
+      	  $scope.currentPage = 1;
+		  $scope.pageSize = 5;
+
 
     	  // Auto-complete function to get list of tags starting with user entries
     	  $scope.getTags = function(val) {
@@ -26,12 +29,14 @@
 
     	  // Selected tags badges
     	  $scope.addToTagList = function($item, $model, $label) {
-    		$scope.tagsList.push($model);
-    		$scope.refreshAdvertsDatabase();
+    		  $scope.tagsList.push($model);
+          	  $scope.currentPage = 1;
+	    	  $scope.refreshAdvertsDatabase(this.tagsList, this.currentPage - 1, this.pageSize);
     	  };
     	  $scope.removeFromTagList = function(index) {
     	      $scope.tagsList.splice(index, 1);
-    	      $scope.refreshAdvertsDatabase();
+          	  $scope.currentPage = 1;
+	    	  $scope.refreshAdvertsDatabase(this.tagsList, this.currentPage - 1, this.pageSize);
       	  };
     	  // End selected tags badges
 
@@ -45,11 +50,8 @@
 		    return array[0];
 		  }
 		  // Category columns pagination
-  		  $scope.setPage = function (pageNo) {
-  			  $scope.bigCurrentPage = pageNo;
-		  };
 		  $scope.pageChanged = function() {
-	    	  $scope.refreshAdvertsDatabase();
+	    	  $scope.refreshAdvertsDatabase(this.tagsList, this.currentPage - 1, this.pageSize);
 		  };
 		  // End category columns pagination
 
@@ -58,24 +60,31 @@
       	  	       	    { title:'Alphabetical', size: 33  },
       	  	       	    { title:'Geographical', size: 33 }
       	  	       	  ];
-      	  
-      	  $scope.bigCurrentPage = 1;
-		  $scope.maxSize = 5;
 
-    	  $scope.refreshAdvertsDatabase = function() {
-    		  return $http.get('//1columnwide.net.nz/public/services/adverts', {
-    	      params: {
-    	        tags : 		$scope.tagsList,
-    	        page: 		$scope.bigCurrentPage - 1,
-    	        pageSize: 	$scope.maxSize
-    	      }
-    	    }).then(function(response){
-    	    	$scope.advertsDatabase = response.data.categoryView;
-				$scope.bigTotalItems = response.data.pageItems;
-				$scope.showPagination = response.data.pageItems > $scope.maxSize;
-    	    });
+		  $scope.getTagList = function() {
+			  return $scope.tagsList;
+		  };
+		  $scope.getPageIdx = function() {
+			  return $scope.currentPage - 1;
+		  };
+		  $scope.getPageSize = function() {
+			  return $scope.pageSize;
+		  };
+    	  $scope.refreshAdvertsDatabase = function(tags,pageIdx,pageSize) {
+    		  $http.get('//1columnwide.net.nz/public/services/adverts', {
+	    	      params: {
+	    	        tags : 		tags,
+	    	        page: 		pageIdx,
+	    	        pageSize: 	pageSize
+	    	      }
+	    	    }).then(function(response){
+	    	    	$scope.advertsDatabase = response.data.categoryView;
+					$scope.totalItems = response.data.pageItems;
+					$scope.showPagination = response.data.pageItems > $scope.pageSize;
+	    	    });
     	  };
-    	  $scope.refreshAdvertsDatabase();
+
+    	  $scope.refreshAdvertsDatabase($scope.tagsList, $scope.currentPage - 1, $scope.pageSize);
       	  $scope.getAdvertsDatabaseCategoryList = function() {
       		  return Object.keys($scope.advertsDatabase);
       	  };
@@ -117,7 +126,6 @@
     }
     SearchController.$inject = injectParams;
 
-    
     angular.module('1columnwide').controller('search', SearchController);
 
 }());
